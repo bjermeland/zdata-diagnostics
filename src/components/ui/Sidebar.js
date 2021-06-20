@@ -29,14 +29,14 @@ const widgetItems = [
 
 const Sidebar = () => {
   return (
-    <div className="d-flex flex-column flex-shrink-0 p-3 text-white sidebar">
+    <div className="d-flex flex-column flex-shrink-0 p-3 text-white sidebar h-100">
       <a
         href="/"
         className="d-flex align-items-center mb-5 ms-3 mb-md-0 me-md-auto text-white text-decoration-none"
       >
         <i className="bi bi-list text-white"></i>
       </a>
-      <ul className="list-group mt-3">
+      <ul className="list-group mt-3 mb-auto">
         {sidebarItems.map((item) => {
           return (
             <li className="list-group-item d-flex justify-content-between align-items-center text-white">
@@ -52,7 +52,7 @@ const Sidebar = () => {
           )
         })}
       </ul>
-      <hr className="white-text w-75 d-flex align-self-center" />
+      {/* <hr className="white-text w-75 d-flex align-self-center" />
       <div className="widget-container mb-auto">
         {widgetItems.map((row, i) => (
           <div key={i} className="row">
@@ -70,7 +70,7 @@ const Sidebar = () => {
             ))}
           </div>
         ))}
-      </div>
+      </div> */}
       <hr className="white-text" />
       <div className="dropdown">
         <a
