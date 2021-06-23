@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import DataTable from 'react-data-table-component'
+import Spinner from '../ui/Spinner'
 
 const data = [
   {
@@ -11,6 +12,7 @@ const data = [
     bic: 'SPRNO22',
     accountant: 'Borgund Regnskap AS',
     lastReceived: '22/04/2021 08:00',
+    isZDataCustomer: true,
   },
   {
     id: 2,
@@ -21,6 +23,7 @@ const data = [
     bic: 'NONO20',
     accountant: 'HK regnskap',
     lastReceived: '22/04/2021 08:00',
+    isZDataCustomer: false,
   },
   {
     id: 3,
@@ -31,6 +34,7 @@ const data = [
     bic: 'SPRNO22',
     accountant: 'Mpr gruppen',
     lastReceived: '22/04/2021 08:00',
+    isZDataCustomer: false,
   },
   {
     id: 4,
@@ -41,6 +45,7 @@ const data = [
     bic: 'APAP50',
     accountant: 'Borgund Regnskap AS',
     lastReceived: '21/04/2021 08:00',
+    isZDataCustomer: false,
   },
   {
     id: 5,
@@ -51,6 +56,7 @@ const data = [
     bic: 'FHFH18',
     accountant: 'Sand økonomi',
     lastReceived: '20/04/2021 08:00',
+    isZDataCustomer: true,
   },
   {
     id: 6,
@@ -61,6 +67,7 @@ const data = [
     bic: 'SPRNO22',
     accountant: 'VIEW Frilans',
     lastReceived: '28/06/2021 08:00',
+    isZDataCustomer: true,
   },
   {
     id: 7,
@@ -71,6 +78,7 @@ const data = [
     bic: 'SPRNO22',
     accountant: 'Borgund Regnskap AS',
     lastReceived: '30/04/2021 08:00',
+    isZDataCustomer: false,
   },
   {
     id: 8,
@@ -81,6 +89,7 @@ const data = [
     bic: 'SPRNO22',
     accountant: 'Borgund Regnskap AS',
     lastReceived: '30/04/2021 08:00',
+    isZDataCustomer: false,
   },
   {
     id: 9,
@@ -91,6 +100,7 @@ const data = [
     bic: 'SPRNO22',
     accountant: 'Borgund Regnskap AS',
     lastReceived: '30/04/2021 08:00',
+    isZDataCustomer: false,
   },
   {
     id: 10,
@@ -101,6 +111,7 @@ const data = [
     bic: 'SPRNO22',
     accountant: 'Borgund Regnskap AS',
     lastReceived: '30/04/2021 08:00',
+    isZDataCustomer: false,
   },
   {
     id: 11,
@@ -111,6 +122,7 @@ const data = [
     bic: 'SPRNO22',
     accountant: 'Borgund Regnskap AS',
     lastReceived: '30/04/2021 08:00',
+    isZDataCustomer: false,
   },
   {
     id: 12,
@@ -121,6 +133,7 @@ const data = [
     bic: 'SPRNO22',
     accountant: 'Borgund Regnskap AS',
     lastReceived: '30/04/2021 08:00',
+    isZDataCustomer: false,
   },
 ]
 
@@ -187,9 +200,22 @@ const customStyles = {
   },
 }
 
+const conditionalRowStyles = [
+  {
+    when: (row) => row.isZDataCustomer,
+    style: {
+      backgroundColor: '#eee',
+    },
+  },
+]
+
 const Table = () => {
-  const [searchQuery, setSearchQuery] = useState('')
   const [filteredData, setFilteredData] = useState(data)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [filterZDataCustomers, setFilterZDataCustomers] = useState(false)
+
+  const [tableLoading, setTableLoading] = useState(false)
+  const [disableRefreshButton, setDisableRefreshButton] = useState(false)
 
   useEffect(() => {
     setFilteredData(
@@ -203,6 +229,25 @@ const Table = () => {
     )
   }, [searchQuery, setSearchQuery])
 
+  useEffect(() => {
+    if (filterZDataCustomers) {
+      setFilteredData(data.filter((item) => item.isZDataCustomer))
+    } else {
+      setFilteredData(data)
+    }
+  }, [filterZDataCustomers, setFilterZDataCustomers])
+
+  const handleRefresh = () => {
+    setDisableRefreshButton(true)
+    setTableLoading(true)
+
+    //* temporary
+    setInterval(() => {
+      setTableLoading(false)
+      setDisableRefreshButton(false)
+    }, 2000)
+  }
+
   return (
     <DataTable
       columns={columns}
@@ -211,33 +256,78 @@ const Table = () => {
       selectableRows
       selectableRowsComponent={Checkbox}
       selectableRowsNoSelectAll
+      conditionalRowStyles={conditionalRowStyles}
+      progressPending={tableLoading}
+      progressComponent={<Spinner />}
       pagination
       noHeader
       subHeader
       subHeaderAlign="left"
       subHeaderComponent={
-        <div className="col-lg-6">
-          <div className="input-group mb-3">
-            <span className="input-group-text" id="search-icon">
-              <i className="ai-search fs-4"></i>
-            </span>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Skriv inn her for å søke.."
-              aria-label="Search"
-              aria-describedby="search-icon"
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </div>
-        </div>
+        <SubHeader
+          setSearchQuery={setSearchQuery}
+          setFilterZDataCustomers={setFilterZDataCustomers}
+          handleRefresh={handleRefresh}
+          disableRefreshButton={disableRefreshButton}
+        />
       }
     />
   )
 }
 
+const SubHeader = ({
+  setSearchQuery,
+  setFilterZDataCustomers,
+  handleRefresh,
+  disableRefreshButton,
+}) => {
+  return (
+    <div className="row w-100" id="table-subheader">
+      <div className="col-lg-6">
+        <div className="input-group mb-3">
+          <span className="input-group-text" id="search-icon">
+            <i className="ai-search fs-4"></i>
+          </span>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Skriv inn her for å søke.."
+            aria-label="Search"
+            aria-describedby="search-icon"
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+      </div>
+      <div className="col-lg-3">
+        <div className="form-check">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            id="zdata-customers"
+            onClick={(e) => setFilterZDataCustomers(e.target.checked)}
+          />
+          <label className="form-check-label" for="zdata-customers">
+            Kun ZData Kunder
+          </label>
+        </div>
+      </div>
+      <div className="col-lg-3">
+        <button
+          type="button"
+          className="btn btn-link"
+          onClick={() => handleRefresh()}
+          disabled={disableRefreshButton}
+        >
+          <i className="ai-refresh-cw me-2"></i>
+          Refresh
+        </button>
+      </div>
+    </div>
+  )
+}
+
 const Checkbox = () => {
-  return <input class="form-check-input" type="checkbox" id="checkbox" />
+  return <input className="form-check-input" type="checkbox" id="checkbox" />
 }
 
 export default Table

@@ -16,3 +16,26 @@
 }
 
 //* End Queue */
+
+//* Table */
+
+#table {
+  #spinner {
+    margin-top: 5em;
+  }
+
+  #table-subheader {
+    .form-check {
+      position: relative;
+      top: 11px;
+    }
+
+    @media only screen and (max-width: 992px) {
+      .form-check {
+        top: 0;
+      }
+    }
+  }
+}
+
+//* End Table */
