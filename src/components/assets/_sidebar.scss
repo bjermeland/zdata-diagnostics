@@ -1,50 +1,10 @@
-.sidebar {
-  width: 400px;
-  height: 100%;
-
-  .bi-list {
-    font-size: 2em;
+#queue {
+  .badge {
+    position: relative;
+    top: 3.5px;
   }
 
-  .list-group-item {
-    background-color: #2d2d2d;
-    border: none;
-    padding: 1.3em 0 1.3em 1em;
-    border-radius: 0.4em;
-
-    font-weight: 500;
-
-    .badge {
-      margin-right: 1.5em;
-      min-width: 40px;
-    }
-
-    &:hover {
-      background-color: #3d3d3d;
-    }
-  }
-}
-
-.widget-container {
-  @extend .container, .text-center;
-
-  .col-md-4 {
-    background-color: #353535;
-    color: #ccc;
-    border-radius: 0.5em;
-    padding: 0.5em 1.5em;
-    // margin: 0.4em;
-
-    i {
-      font-size: 2em;
-    }
-
-    span {
-      font-size: 0.7em;
-    }
-
-    &:hover {
-      background-color: #464646;
-    }
+  .bg-lightgrey {
+    background-color: #778899;
   }
 }

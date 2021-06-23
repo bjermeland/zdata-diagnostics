@@ -1,31 +1,102 @@
 //* Import Google Font (Inter)
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url($path-to-fonts);
 
-//* Sticky footer
-html,
-body {
-  height: 100%;
+html * {
+  @include font-smoothing;
 }
 
+// Sticky footer
+html,
+body,
+#root {
+  height: 100%;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 body {
   display: flex;
   flex-direction: column;
-
-  margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #2d2d2d;
 }
-
-#root {
-  height: 100%;
+.page-wrapper {
   flex: 1 0 auto;
 }
+.footer {
+  flex-shrink: 0;
+}
 
-.bg-dark {
-  background-color: #2d2d2d !important;
+// Links
+a:focus {
+  outline: none;
+}
+a {
+  transition: $link-transition;
+}
+
+// Images
+// Responsive images (ensure images don't scale beyond their parents)
+img,
+figure {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+svg {
+  max-width: 100%;
+}
+
+// Responsive iframes
+iframe {
+  width: 100%;
+}
+
+// Full height iframe
+.iframe-full-height-wrap {
+  min-height: 18rem;
+  overflow: hidden;
+}
+.iframe-full-height {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+// Text Selection Color
+::selection {
+  background: $user-selection-color;
+}
+::-moz-selection {
+  background: $user-selection-color;
+}
+
+// Change Bootstrap default .container-fluid paddings
+@include media-breakpoint-up(xl) {
+  .container-fluid {
+    padding-right: $grid-gutter-width;
+    padding-left: $grid-gutter-width;
+  }
+}
+
+small {
+  font-weight: inherit;
+}
+
+// Remove top padding from body when screen size below md (992px)
+@include media-breakpoint-down(md) {
+  body {
+    padding-top: 0 !important;
+  }
+}
+
+// Disable button :focus outline
+button:focus {
+  outline: none;
+}
+
+// Horizontal rule - light version
+.hr-light {
+  color: $border-light-color;
 }

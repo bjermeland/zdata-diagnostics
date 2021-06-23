@@ -1,11 +1,20 @@
-//* Import relevant styles
+//* User variables
+@import 'user-variables';
 
+//* Configuration & utilities
+@import 'variables';
+@import 'mixins';
+@import 'utilities';
+
+//* Bootstrap
 @import 'node_modules/bootstrap/scss/bootstrap';
 
-@import '~bootstrap-icons/font/bootstrap-icons.css';
-
+//* Layout & components
 @import 'reboot';
+@import 'components';
+
+//* Custom styles
 
 @import 'sidebar';
 
-@import 'tables';
+@import 'custom';

@@ -1,3 +1,5 @@
+import { Link, NavLink } from 'react-router-dom'
+
 const sidebarItems = [
   { name: 'AgreementFileQueues', fileCount: 3 },
   { name: 'DnbConnector', fileCount: 62 },
@@ -6,7 +8,7 @@ const sidebarItems = [
   { name: 'NordeaConnector', fileCount: 482 },
   { name: 'SdcConnector', fileCount: 107 },
   { name: 'SebConnector', fileCount: 15 },
-  { name: 'Supportcases', fileCount: 4 },
+  { name: 'Support Cases', fileCount: 4 },
 ]
 
 const widgetItems = [
@@ -29,86 +31,75 @@ const widgetItems = [
 
 const Sidebar = () => {
   return (
-    <div className="d-flex flex-column flex-shrink-0 p-3 text-white sidebar h-100">
-      <a
-        href="/"
-        className="d-flex align-items-center mb-5 ms-3 mb-md-0 me-md-auto text-white text-decoration-none"
-      >
-        <i className="bi bi-list text-white"></i>
-      </a>
-      <ul className="list-group mt-3 mb-auto">
-        {sidebarItems.map((item) => {
-          return (
-            <li className="list-group-item d-flex justify-content-between align-items-center text-white">
-              {item.name}
-              <span
-                className={`badge bg-${
-                  item.name.includes('cases') ? 'primary' : 'danger'
-                } rounded-pill`}
-              >
-                {item.fileCount}
-              </span>
-            </li>
-          )
-        })}
-      </ul>
-      {/* <hr className="white-text w-75 d-flex align-self-center" />
-      <div className="widget-container mb-auto">
-        {widgetItems.map((row, i) => (
-          <div key={i} className="row">
-            {row.map((col, i) => (
-              <div className="col-md-4">
-                <div class="d-flex flex-column">
-                  <div class="item-1 d-flex justify-content-center">
-                    <i className={`bi bi-${col.icon}`}></i>
-                  </div>
-                  <div class="flex-fill mt-2">
-                    <span>{col.name}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ))}
-      </div> */}
-      <hr className="white-text" />
-      <div className="dropdown">
-        <a
-          href="#"
-          className="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-          id="dropdownUser1"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <img
-            src="https://github.com/mdo.png"
-            alt=""
-            width="32"
-            height="32"
-            className="rounded-circle me-2"
-          />
-          <strong>Markus Bjermeland</strong>
-        </a>
-        <ul
-          className="dropdown-menu dropdown-menu-dark text-small shadow"
-          aria-labelledby="dropdownUser1"
-        >
-          <li>
-            <a className="dropdown-item" href="#">
-              Profile
-            </a>
-          </li>
-          <li>
-            <hr className="dropdown-divider" />
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">
-              Sign out
-            </a>
-          </li>
-        </ul>
+    <aside className="offcanvas offcanvas-expand bg-dark" id="sidebar">
+      <div className="offcanvas-header bg-darker d-none d-lg-block py-2">
+        <Link to="/" className="navbar-brand py-1 text-white fs-3">
+          Diagnostics
+        </Link>
       </div>
-    </div>
+      <div className="offcanvas-header bg-darker d-flex d-lg-none align-items-center">
+        <div className="d-flex align-items-center mt-1">
+          <h5 className="text-light mb-0 me-3">Diagnostics</h5>
+        </div>
+        <button
+          className="btn-close btn-close-white"
+          type="button"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div className="offcanvas-body pt-4 pb-grid-gutter">
+        <h6 className="text-light pt-3 pb-2 border-bottom border-light">
+          Dashboard
+        </h6>
+        <nav className="widget-nav nav nav-light flex-column">
+          <NavLink
+            exact
+            to="/"
+            className="nav-link fs-sm mb-4"
+            activeClassName="active"
+          >
+            Overview
+          </NavLink>
+          <NavLink
+            to="/files-in-error"
+            className="nav-link fs-sm mb-4"
+            activeClassName="active"
+          >
+            Files in error
+          </NavLink>
+        </nav>
+        <h6 className="text-light pt-3 pb-2 border-bottom border-light">
+          Unmapped Files
+        </h6>
+        <nav className="widget-nav nav nav-light flex-column">
+          {sidebarItems.map((item, index) => {
+            return (
+              <NavLink
+                key={index}
+                exact
+                to={`/${item.name.toLowerCase()}`}
+                className="nav-link fs-sm mb-4"
+                activeClassName="active"
+              >
+                {item.name}
+                <span className="badge rounded-pill bg-danger float-end">
+                  {item.fileCount}
+                </span>
+              </NavLink>
+            )
+          })}
+        </nav>
+        <h6 className="text-light pt-3 pb-2 border-bottom border-light">
+          Account
+        </h6>
+        <nav className="widget-nav nav nav-light flex-column">
+          <a className="nav-link fs-sm" href="#">
+            Sign out
+          </a>
+        </nav>
+      </div>
+    </aside>
   )
 }
 
