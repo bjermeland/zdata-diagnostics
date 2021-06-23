@@ -40,7 +40,7 @@ const UnmappedFiles = ({ location }) => {
     <section>
       <div className="border-bottom pt-5 pb-2 mt-2 mb-5">
         <Breadcrumbs first={'Unmapped Files'} second={currentPage} />
-        <h1 className="mt-lg-4 pt-2">{currentPage}</h1>
+        <h1 className="mt-lg-4 pt-2 fs-2">{currentPage}</h1>
       </div>
       <div className="row">
         <div className="col-lg-12">

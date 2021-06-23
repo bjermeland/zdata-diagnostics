@@ -72,6 +72,56 @@ const data = [
     accountant: 'Borgund Regnskap AS',
     lastReceived: '30/04/2021 08:00',
   },
+  {
+    id: 8,
+    company: 'Bedrift Alpha AS',
+    orgNumber: '123123123',
+    description: 'Venter på onboarding fra Uni.',
+    fileTypes: 'C053, C54C',
+    bic: 'SPRNO22',
+    accountant: 'Borgund Regnskap AS',
+    lastReceived: '30/04/2021 08:00',
+  },
+  {
+    id: 9,
+    company: 'Bedrift Alpha AS',
+    orgNumber: '123123123',
+    description: 'Venter på onboarding fra Uni.',
+    fileTypes: 'C053, C54C',
+    bic: 'SPRNO22',
+    accountant: 'Borgund Regnskap AS',
+    lastReceived: '30/04/2021 08:00',
+  },
+  {
+    id: 10,
+    company: 'Coop AS',
+    orgNumber: '123123123',
+    description: 'Venter på onboarding fra Uni.',
+    fileTypes: 'C053, C54C',
+    bic: 'SPRNO22',
+    accountant: 'Borgund Regnskap AS',
+    lastReceived: '30/04/2021 08:00',
+  },
+  {
+    id: 11,
+    company: 'Kiwi',
+    orgNumber: '123123123',
+    description: 'Venter på onboarding fra Uni.',
+    fileTypes: 'C053, C54C',
+    bic: 'SPRNO22',
+    accountant: 'Borgund Regnskap AS',
+    lastReceived: '30/04/2021 08:00',
+  },
+  {
+    id: 12,
+    company: 'REMA 1000',
+    orgNumber: '123123123',
+    description: 'Venter på onboarding fra Uni.',
+    fileTypes: 'C053, C54C',
+    bic: 'SPRNO22',
+    accountant: 'Borgund Regnskap AS',
+    lastReceived: '30/04/2021 08:00',
+  },
 ]
 
 const columns = [
@@ -161,6 +211,7 @@ const Table = () => {
       selectableRows
       selectableRowsComponent={Checkbox}
       selectableRowsNoSelectAll
+      pagination
       noHeader
       subHeader
       subHeaderAlign="left"
