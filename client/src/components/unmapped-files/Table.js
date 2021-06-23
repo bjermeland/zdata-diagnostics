@@ -327,7 +327,7 @@ const SubHeader = ({
 }
 
 const Checkbox = () => {
-  return <input className="form-check-input" type="checkbox" id="checkbox" />
+  return <input className="form-check-input" type="checkbox" />
 }
 
 export default Table

@@ -1,4 +1,5 @@
 import { Link, NavLink } from 'react-router-dom'
+import userManager from '../../tools/userManager'
 
 const sidebarItems = [
   { name: 'AgreementFileQueues', fileCount: 3 },
@@ -78,7 +79,9 @@ const Sidebar = () => {
               <NavLink
                 key={index}
                 exact
-                to={`/unmapped-files/${item.name.replace(/\s+/g, '-').toLowerCase()}`}
+                to={`/unmapped-files/${item.name
+                  .replace(/\s+/g, '-')
+                  .toLowerCase()}`}
                 className="nav-link fs-sm mb-4"
                 activeClassName="active"
               >
@@ -93,10 +96,13 @@ const Sidebar = () => {
         <h6 className="text-light pt-3 pb-2 border-bottom border-light">
           Account
         </h6>
-        <nav className="widget-nav nav nav-light flex-column">
-          <a className="nav-link fs-sm" href="#">
+        <nav className="widget-nav nav nav-light">
+          <button
+            className="btn btn-link nav-link fs-sm text-decoration-none-hover"
+            onClick={() => userManager.signoutRedirect()}
+          >
             Sign out
-          </a>
+          </button>
         </nav>
       </div>
     </aside>
