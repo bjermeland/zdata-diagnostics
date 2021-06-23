@@ -1,4 +1,3 @@
-import React from 'react'
 import { useHistory } from 'react-router'
 
 const queues = [
@@ -26,7 +25,7 @@ const Queue = () => {
           return (
             <div
               key={index}
-              className="bg-lightgrey rounded py-4 px-5 br-25 text-white fs-5 mb-2"
+              className="alert alert-dark py-4 px-5 mb-2"
               onClick={() =>
                 history.push(
                   `/files-in-error/${item.name

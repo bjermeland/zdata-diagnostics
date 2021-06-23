@@ -1,11 +1,12 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import AuthCallback from '../tools/AuthCallback'
+import CheckAuth from '../tools/CheckAuth'
+import Spinner from './ui/Spinner'
 import Header from './ui/Header'
 import Sidebar from './ui/Sidebar'
 import Dashboard from './dashboard/Dashboard'
-import CheckAuth from '../tools/CheckAuth'
-import AuthCallback from '../tools/AuthCallback'
-import { useSelector } from 'react-redux'
-import Spinner from './ui/Spinner'
+import UnmappedFiles from './unmapped-files/UnmappedFiles'
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const Routes = () => {
           <Header />
           <Sidebar />
           <Route exact path="/" component={Dashboard} />
+          <Route path="/unmapped-files" component={UnmappedFiles} />
         </div>
       </section>
     </main>

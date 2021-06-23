@@ -1,5 +1,3 @@
-import React from 'react'
-
 const services = [
   { name: 'BankService', status: 'success', lastUpdate: 'a minute ago' },
   {
@@ -28,10 +26,10 @@ const Services = () => {
           return (
             <div
               key={index}
-              className={`bg-${item.status} rounded py-4 px-5 br-25 text-white fs-5 mb-2`}
+              className={`alert alert-${item.status} py-4 px-5 mb-2`}
             >
               {item.name}
-              <small className="float-end fw-bolder">{item.lastUpdate}</small>
+              <small className="float-end fw-normal">{item.lastUpdate}</small>
             </div>
           )
         })}

@@ -14,15 +14,12 @@ const Header = () => {
       <Link to="/" className="navbar-brand d-lg-none">
         Diagnostics
       </Link>
-      <ul className="navbar-nav ms-auto d-none d-lg-flex">
+      <ul className="navbar-nav ms-auto d-none d-lg-flex me-3">
         <li className="nav-item">
           <Link to="/" className="nav-link">
             <i className="ai-file-text align-middle mt-n1 me-2"></i>
             Documentation
           </Link>
-        </li>
-        <li className="nav-item">
-          <div className="nav-link disabled text-border px-1">|</div>
         </li>
       </ul>
       <button

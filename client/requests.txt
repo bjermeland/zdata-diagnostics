@@ -1,0 +1,13 @@
+Diagnostics Feedback and Requests
+
+
+Requests:
+
+- Laste ned filer i notepad
+
+- Søke etter messageId i notepad
+
+- Bedre søkemuligheter i uncollected (søk etter alle fields)
+
+- https://z-data.slack.com/archives/D025R0EQQ2D/p1624433118006100 (EvryConnector - Send error message directly to customer)
+

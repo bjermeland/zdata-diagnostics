@@ -1,4 +1,3 @@
-import React from 'react'
 import { CallbackComponent } from 'redux-oidc'
 import userManager from './userManager'
 import Spinner from '../components/ui/Spinner'

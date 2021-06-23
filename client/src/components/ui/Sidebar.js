@@ -78,7 +78,7 @@ const Sidebar = () => {
               <NavLink
                 key={index}
                 exact
-                to={`/${item.name.toLowerCase()}`}
+                to={`/unmapped-files/${item.name.replace(/\s+/g, '-').toLowerCase()}`}
                 className="nav-link fs-sm mb-4"
                 activeClassName="active"
               >
