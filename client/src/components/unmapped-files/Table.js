@@ -83,7 +83,16 @@ const columns = [
       <div>
         <span>{row.company}</span>
         <br />
-        <span style={{ fontSize: '13px', color: '#ccc' }}>{row.orgNumber}</span>
+        <span
+          style={{
+            fontSize: '13px',
+            color: '#aaa',
+            position: 'relative',
+            top: '4px',
+          }}
+        >
+          {row.orgNumber}
+        </span>
       </div>
     ),
   },
