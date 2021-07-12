@@ -2,14 +2,14 @@
 // Breadcrumb
 // --------------------------------------------------
 
-
 // Base
 
 .breadcrumb-item {
   font-weight: $nav-link-font-weight;
+  text-transform: capitalize;
 
   &::before {
-    margin-top: -.0625rem;
+    margin-top: -0.0625rem;
     font: {
       family: $icons-font-family;
       size: $breadcrumb-divider-font-size;
@@ -29,27 +29,32 @@
 
     > i {
       margin: {
-        top: -.0625rem;
-        right: .325rem;
+        top: -0.0625rem;
+        right: 0.325rem;
       }
       @include font-size(1.05em);
       vertical-align: middle;
     }
   }
 
-  &.active { cursor: default; }
+  &.active {
+    cursor: default;
+  }
 }
-
 
 // Light version
 
-.breadcrumb-light .breadcrumb-item  {
-  &::before { color: $breadcrumb-light-divider-color; }
+.breadcrumb-light .breadcrumb-item {
+  &::before {
+    color: $breadcrumb-light-divider-color;
+  }
   > a {
     color: $breadcrumb-light-item-link-color;
     &:hover {
       color: $breadcrumb-light-item-link-hover-color;
     }
   }
-  &.active { color: $breadcrumb-light-active-color; }
+  &.active {
+    color: $breadcrumb-light-active-color;
+  }
 }

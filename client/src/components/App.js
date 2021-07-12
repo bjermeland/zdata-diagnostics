@@ -7,6 +7,8 @@ import Header from './ui/Header'
 import Sidebar from './ui/Sidebar'
 import Dashboard from './dashboard/Dashboard'
 import UnmappedFiles from './unmapped-files/UnmappedFiles'
+import Company from './unmapped-files/Company'
+import File from './unmapped-files/File'
 
 const App = () => {
   return (
@@ -19,16 +21,35 @@ const App = () => {
   )
 }
 
+const UnmappedFilesRoutes = [
+  'AgreementFileQueues',
+  'DnbConnector',
+  'DnbSignedConnector',
+  'EvryConnector',
+  'NordeaConnector',
+  'SdcConnector',
+  'SebConnector',
+]
+
 const Routes = () => {
   const auth = useSelector((state) => state.auth)
   return auth && auth.user && auth.user.profile ? (
     <main className="container-fluid">
       <section className="offcanvas-enabled-start row pb-3 pb-md-4">
-        <div className="col-xxl-9">
+        <div className="col-xxl-12">
           <Header />
           <Sidebar />
           <Route exact path="/" component={Dashboard} />
-          <Route path="/unmapped-files" component={UnmappedFiles} />
+          <Route exact path="/unmapped-files" component={UnmappedFiles} />
+          {UnmappedFilesRoutes.map((route) => {
+            return (
+              <div key={route}>
+                <Route exact path={`/unmapped-files/${route}`} component={UnmappedFiles} />
+                <Route exact path={`/unmapped-files/${route}/:orgnumber`} component={Company} />
+                <Route excat path={`/unmapped-files/${route}/:orgnumber/:id`} component={File} />
+              </div>
+            )
+          })}
         </div>
       </section>
     </main>

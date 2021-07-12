@@ -4,6 +4,14 @@
   text-decoration: none;
 }
 
+.text-underline-hover {
+  text-decoration: none;
+}
+
+.text-underline-hover:hover {
+  text-decoration: underline;
+}
+
 //* End General */
 
 //* Queue */
@@ -47,3 +55,19 @@
 }
 
 //* End Table */
+
+//* Code Container */
+
+#code-container pre pre {
+  padding: 0 !important;
+  background-color: $secondary !important;
+
+  .comment:not(.token) {
+    margin-bottom: 0 !important;
+    padding-bottom: 0.2rem !important;
+    border-bottom: 0 !important;
+    font-size: 12px !important;
+  }
+}
+
+//* End Code Container */
