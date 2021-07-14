@@ -24,7 +24,7 @@ const conditionalRowStyles = [
   },
 ]
 
-const Table = ({ columns, data, onRowClicked, displayZDataCustomersFilter }) => {
+const Table = ({ columns, data, onRowClicked, displayZDataCustomersFilter, displayToolbar }) => {
   const [filteredData, setFilteredData] = useState(data)
   const [searchQuery, setSearchQuery] = useState('')
   const [filterZDataCustomers, setFilterZDataCustomers] = useState(false)
@@ -81,6 +81,7 @@ const Table = ({ columns, data, onRowClicked, displayZDataCustomersFilter }) => 
       subHeaderComponent={
         <SubHeader
           displayZDataCustomersFilter={displayZDataCustomersFilter}
+          displayToolbar={displayToolbar}
           setSearchQuery={setSearchQuery}
           setFilterZDataCustomers={setFilterZDataCustomers}
           handleRefresh={handleRefresh}
@@ -93,6 +94,7 @@ const Table = ({ columns, data, onRowClicked, displayZDataCustomersFilter }) => 
 
 const SubHeader = ({
   displayZDataCustomersFilter,
+  displayToolbar,
   setSearchQuery,
   setFilterZDataCustomers,
   handleRefresh,
@@ -130,19 +132,21 @@ const SubHeader = ({
             </label>
           </div>
         )}
-        <div className="btn-toolbar" role="toolbar" aria-label="Settings toolbar">
-          <div className="btn-group me-2 mb-2" role="group" aria-label="Settings group">
-            <button type="button" className="btn btn-translucent-info btn-icon" title="Refresh">
-              <i className="ai-refresh-cw"></i>
-            </button>
-            <button type="button" className="btn btn-translucent-primary btn-icon" title="Retry selected">
-              <i className="ai-download"></i>
-            </button>
-            <button type="button" className="btn btn-translucent-danger btn-icon" title="Delete selected">
-              <i className="ai-trash-2"></i>
-            </button>
+        {displayToolbar && (
+          <div className="btn-toolbar" role="toolbar" aria-label="Settings toolbar">
+            <div className="btn-group me-2 mb-2" role="group" aria-label="Settings group">
+              <button type="button" className="btn btn-translucent-info btn-icon" title="Refresh">
+                <i className="ai-refresh-cw"></i>
+              </button>
+              <button type="button" className="btn btn-translucent-primary btn-icon" title="Retry selected">
+                <i className="ai-download"></i>
+              </button>
+              <button type="button" className="btn btn-translucent-danger btn-icon" title="Delete selected">
+                <i className="ai-trash-2"></i>
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
       {/* <div className="col-lg-3">
         <button type="button" className="btn btn-link" onClick={() => handleRefresh()} disabled={disableRefreshButton}>

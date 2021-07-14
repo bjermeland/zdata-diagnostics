@@ -152,7 +152,7 @@ const Company = ({ location }) => {
       </div>
       <div className="row">
         <div className="col-lg-8 card d-block border-primary pt-3" id="table">
-          <Table columns={columns} data={data} onRowClicked={(row) => handleRowClick(row)} />
+          <Table columns={columns} data={data} onRowClicked={(row) => handleRowClick(row)} displayToolbar />
         </div>
         <div className="col-lg-4 mb-2">
           <div className="card border-primary">
