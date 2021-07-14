@@ -12,6 +12,10 @@
   text-decoration: underline;
 }
 
+.justify-content-evenly {
+  justify-content: space-evenly;
+}
+
 //* End General */
 
 //* Queue */
@@ -69,9 +73,90 @@
   }
 
   .code-block pre {
-    background-color: $secondary !important;
     height: 60vh !important;
+  }
+
+  .hidden-textarea {
+    z-index: 999;
+    position: absolute;
+    left: -999999px;
+  }
+}
+
+.code-container-light {
+  .code-block pre,
+  .hidden-textarea {
+    background-color: $secondary !important;
+  }
+}
+
+.code-container-dark {
+  background-color: #303144 !important;
+
+  .code-block pre,
+  .hidden-textarea {
+    background-color: #303144 !important;
+
+    &:not(.hidden-textarea) {
+      span:not([style]) {
+        color: #ddd;
+      }
+    }
   }
 }
 
 //* End Code Container */
+
+//* File Share Container */
+
+#file-share-container {
+  .logo-responsive {
+    max-width: 250px;
+    min-width: 180px;
+  }
+
+  .card {
+    min-height: 103px;
+  }
+
+  .toolbar {
+    background-color: #3e3f58;
+
+    .row {
+      background-color: #3e3f58;
+      border-top-left-radius: 1em;
+      border-top-right-radius: 1em;
+    }
+
+    .input-group-text,
+    .form-control {
+      background-color: #303144 !important;
+      border: none;
+      color: #ddd;
+      box-shadow: 0;
+      outline: 0 none;
+    }
+    .form-control:focus {
+      border: none;
+      box-shadow: 0;
+    }
+  }
+}
+
+//* End File Share Container */
+
+//* Color classes */
+
+.text-eee {
+  color: #eee;
+}
+
+.text-ddd {
+  color: #ddd;
+}
+
+.text-ccc {
+  color: #ccc;
+}
+
+//* End color classes */

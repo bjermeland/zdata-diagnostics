@@ -1,12 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
-import { useHistory } from 'react-router'
-import { getBreadcrumbsByPath } from '../../utils/pagetitles'
-import Breadcrumbs from '../ui/Breadcrumbs'
 import Spinner from '../ui/Spinner'
+
+import logo from '../assets/images/zdata-logo.svg'
 
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import virtualizedRenderer from 'react-syntax-highlighter-virtualized-renderer'
-import { vs } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import { vs2015 } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import format from 'xml-formatter'
 
 const xml = `<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:camt.053.001.02">
@@ -329,21 +328,11 @@ const xml = `<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml
 </BkToCstmrStmt>
 </Document>`
 
-const File = ({ location }) => {
-  const [currentPage, setCurrentPage] = useState(null)
-  const [breadcrumbs, setBreadcrumbs] = useState([])
-  const history = useHistory()
-
-  useEffect(() => {
-    const breadcrumbs = getBreadcrumbsByPath(location.pathname)
-    setCurrentPage(breadcrumbs[breadcrumbs.length - 1].name)
-    setBreadcrumbs(breadcrumbs)
-  }, [location, history])
-
-  //* ---
-
+const FileShare = () => {
   const [fileContent, setFileContent] = useState('')
   const [highlightedLineNumbers, setHighlightedLineNumbers] = useState([])
+
+  //* used for copy to clickboard action
   let textAreaRef = useRef(fileContent)
 
   useEffect(() => {
@@ -351,16 +340,7 @@ const File = ({ location }) => {
       collapseContent: true,
     })
     setFileContent(content)
-  }, [location.pathname])
-
-  const data = [
-    {
-      id: 'e67af04e-5270-45c1-be0a-4511f041f78e',
-      name: 'P.00921643497.000.C053.20210706064739-E2C6G.DAT',
-      state: 'DownloadProcess',
-      created: '07/06/2021 06:47:55',
-    },
-  ]
+  }, [])
 
   const handleSearchInput = (value) => {
     if (value === '') {
@@ -398,90 +378,124 @@ const File = ({ location }) => {
     document.execCommand('copy')
   }
 
-  return currentPage ? (
-    <section>
-      <div className="border-bottom pt-5 pb-1 mt-2 mb-4 row">
-        <Breadcrumbs currentPage={currentPage} items={breadcrumbs} />
-        <div className="col-lg-7">
-          <h1 className="mt-lg-4 pt-2 fs-4 text-truncate">P.00921643497.000.C053.20210706064739-E2C6G.DAT</h1>
-          <p className="text-muted">Camt053 (Avstemming) - 07/08/2021 06:47:41</p>
-        </div>
-        <div className="col-lg-3">
-          <div className="card border-primary mb-3">
-            <div className="card-body">
-              <h5 className="card-title fs-sm">Company</h5>
-              <p className="card-text fs-sm">Bedrift Alpha AS (999 473 200)</p>
+  return true ? (
+    <main className="container-fluid h-100 bg-dark text-white" id="file-share-container">
+      <div className="col-xxl-12">
+        <section>
+          <div className="border-bottom border-light pt-5 pb-1 mb-4 row">
+            <div className="col-lg-3">
+              <img class="w-50 logo-responsive" src={logo} alt="ZData Logo" />
+              <small className="py-3 d-block">
+                Matias fra ZData har delt denne bankfilen med deg.
+                <br />
+                Trykk på "Fullfør Fildeling" for å slette linktilgangen.
+              </small>
             </div>
-          </div>
-        </div>
-        <div className="col-lg-2">
-          <div className="card border-primary mb-0">
-            <div className="card-body">
-              <div className="card-text fs-sm">
-                <div className="row text-center text-decoration-none">
-                  <div className="col">
-                    <button type="button" className="btn btn-secondary btn-icon" onClick={() => handleCopyButton()}>
-                      <i className="ai-copy"></i>
-                    </button>
-                  </div>
-                  <div className="col">
-                    <button type="button" className="btn btn-secondary btn-icon" onClick={() => handleDownloadButton()}>
-                      <i className="ai-download"></i>
-                    </button>
-                  </div>
-                  <div className="col">
-                    <button type="button" className="btn btn-secondary btn-icon" onClick={() => handleShareButton()}>
-                      <i className="ai-share-2"></i>
-                    </button>
+            <div className="col-lg-6">
+              <div className="card bg-dark border-light border-3 mb-3">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-lg-7 mb-3">
+                      <h5 className="card-title fs-sm text-ccc text-truncate">Name</h5>
+                      <p className="card-text fs-sm">P.00921643497.000.C053.20210706064739-E2C6G.DAT</p>
+                    </div>
+                    <div className="col-lg-2 mb-3">
+                      <h5 className="card-title fs-sm text-ccc">Format</h5>
+                      <p className="card-text fs-sm">Camt053</p>
+                    </div>
+                    <div className="col-lg-3">
+                      <h5 className="card-title fs-sm text-ccc">Created</h5>
+                      <p className="card-text fs-sm">07/08/2021 06:47:41</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+            <div className="col-lg-3">
+              <div className="card bg-dark border-light border-3 mb-3">
+                <div className="card-body">
+                  <h5 className="card-title fs-sm text-ccc">Company</h5>
+                  <p className="card-text fs-sm">Bedrift Alpha AS (999 473 200)</p>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div className="row" id="code-container">
-        <div className="col-lg-12 card d-block border-primary bg-secondary pt-3 code-container-light" id="table">
-          <div className="form-floating mb-3">
-            <input
-              className="form-control"
-              type="text"
-              id="search-in-file"
-              placeholder="Search in file"
-              onChange={(e) => handleSearchInput(e.target.value)}
-            />
-            <label htmlFor="search-in-file">Search in file</label>
-          </div>
+          <div className="row" id="code-container">
+            <div className="col-lg-12 card d-block border-0 code-container-dark pb-2" id="table">
+              <div class="toolbar">
+                <div className="row pt-3">
+                  <div className="col-lg-8">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">
+                        <i class="ai-search fs-xl"></i>
+                      </span>
+                      <input
+                        className="form-control"
+                        type="text"
+                        id="search-in-file"
+                        placeholder="Search in file"
+                        onChange={(e) => handleSearchInput(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-lg-4">
+                    <div className="row text-center text-decoration-none">
+                      <div className="col-lg-6 d-flex justify-content-evenly">
+                        <button type="button" className="btn btn-dark btn-icon" onClick={() => handleShareButton()}>
+                          <i className="ai-grid"></i>
+                        </button>
+                        <button type="button" className="btn btn-dark btn-icon" onClick={() => handleCopyButton()}>
+                          <i className="ai-copy"></i>
+                        </button>
+                        <button type="button" className="btn btn-dark btn-icon" onClick={() => handleDownloadButton()}>
+                          <i className="ai-download"></i>
+                        </button>
+                      </div>
+                      <div className="col-lg-6">
+                        <button
+                          type="button"
+                          class="btn btn-danger opacity-90 btn-sm d-flex justify-content-center align-items-center py-2"
+                        >
+                          Fullfør Fildeling
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-          <div className="line-numbers overflow-auto code-block">
-            <SyntaxHighlighter
-              language="xml"
-              style={vs}
-              showLineNumbers
-              wrapLines
-              renderer={virtualizedRenderer()}
-              lineProps={(lineNumber) => {
-                let style = { display: 'block' }
-                if (highlightedLineNumbers.includes(lineNumber - 1)) {
-                  style.backgroundColor = '#ffe7a4'
-                }
-                return { style }
-              }}
-            >
-              {fileContent}
-            </SyntaxHighlighter>
+              <div className="line-numbers overflow-auto code-block">
+                <SyntaxHighlighter
+                  language="xml"
+                  style={vs2015}
+                  showLineNumbers
+                  wrapLines
+                  renderer={virtualizedRenderer()}
+                  lineProps={(lineNumber) => {
+                    let style = { display: 'block' }
+                    if (highlightedLineNumbers.includes(lineNumber - 1)) {
+                      style.backgroundColor = 'rgb(110 110 110 / 60%)'
+                    }
+                    return { style }
+                  }}
+                >
+                  {fileContent}
+                </SyntaxHighlighter>
+              </div>
+              <textarea
+                className="hidden-textarea bg-dark"
+                ref={(textarea) => (textAreaRef = textarea)}
+                defaultValue={fileContent}
+                readOnly
+              />
+            </div>
           </div>
-          <textarea
-            className="hidden-textarea"
-            ref={(textarea) => (textAreaRef = textarea)}
-            defaultValue={fileContent}
-          />
-        </div>
+        </section>
       </div>
-    </section>
+    </main>
   ) : (
     <Spinner />
   )
 }
 
-export default File
+export default FileShare

@@ -9,6 +9,7 @@ import Dashboard from './dashboard/Dashboard'
 import UnmappedFiles from './unmapped-files/UnmappedFiles'
 import Company from './unmapped-files/Company'
 import File from './unmapped-files/File'
+import FileShare from './file-share/FileShare'
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Routes />
         <Route exact path="/oidc-callback" component={AuthCallback} />
       </CheckAuth>
+      <Route exact path="/share/:id" component={FileShare} />
     </Router>
   )
 }
