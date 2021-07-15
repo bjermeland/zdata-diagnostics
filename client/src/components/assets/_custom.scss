@@ -56,6 +56,15 @@
       }
     }
   }
+
+  .rdt_TableBody input[type='checkbox'] {
+    height: 0.9em;
+    width: 0.9em;
+  }
+
+  input[type='checkbox'] {
+    @extend .form-check-input;
+  }
 }
 
 //* End Table */
@@ -64,13 +73,6 @@
 
 #code-container {
   padding: 0 !important;
-
-  .comment:not(.token) {
-    margin-bottom: 0 !important;
-    padding-bottom: 0.2rem !important;
-    border-bottom: 0 !important;
-    font-size: 12px !important;
-  }
 
   .code-block pre {
     height: 60vh !important;
@@ -160,3 +162,30 @@
 }
 
 //* End color classes */
+
+//* Toasts */
+
+.Toastify {
+  .Toastify__progress-bar--default {
+    background: #766df4;
+  }
+
+  .Toastify__toast-container,
+  .Toastify__toast {
+    padding: 0;
+  }
+
+  .toast {
+    box-shadow: none;
+
+    .toast-body {
+      color: #747272;
+    }
+  }
+
+  .Toastify__close-button {
+    display: none;
+  }
+}
+
+//* End Toasts */

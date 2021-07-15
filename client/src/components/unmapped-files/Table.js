@@ -67,7 +67,6 @@ const Table = ({ columns, data, onRowClicked, displayZDataCustomersFilter, displ
       data={filteredData}
       customStyles={customStyles}
       selectableRows
-      selectableRowsComponent={Checkbox}
       conditionalRowStyles={conditionalRowStyles}
       progressPending={tableLoading}
       progressComponent={<Spinner />}

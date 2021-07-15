@@ -384,9 +384,9 @@ const FileShare = () => {
         <section>
           <div className="border-bottom border-light pt-5 pb-1 mb-4 row">
             <div className="col-lg-3">
-              <img class="w-50 logo-responsive" src={logo} alt="ZData Logo" />
+              <img className="w-50 logo-responsive" src={logo} alt="ZData Logo" />
               <small className="py-3 d-block">
-                Matias fra ZData har delt denne bankfilen med deg.
+                Noen fra ZData har delt denne bankfilen med deg.
                 <br />
                 Trykk på "Fullfør Fildeling" for å slette linktilgangen.
               </small>
@@ -422,12 +422,12 @@ const FileShare = () => {
           </div>
           <div className="row" id="code-container">
             <div className="col-lg-12 card d-block border-0 code-container-dark pb-2" id="table">
-              <div class="toolbar">
+              <div className="toolbar">
                 <div className="row pt-3">
                   <div className="col-lg-8">
-                    <div class="input-group mb-3">
-                      <span class="input-group-text">
-                        <i class="ai-search fs-xl"></i>
+                    <div className="input-group mb-3">
+                      <span className="input-group-text">
+                        <i className="ai-search fs-xl"></i>
                       </span>
                       <input
                         className="form-control"
@@ -454,7 +454,7 @@ const FileShare = () => {
                       <div className="col-lg-6">
                         <button
                           type="button"
-                          class="btn btn-danger opacity-90 btn-sm d-flex justify-content-center align-items-center py-2"
+                          className="btn btn-danger opacity-90 btn-sm d-flex justify-content-center align-items-center py-2"
                         >
                           Fullfør Fildeling
                         </button>
@@ -471,6 +471,7 @@ const FileShare = () => {
                   showLineNumbers
                   wrapLines
                   renderer={virtualizedRenderer()}
+                  lineNumberStyle={{ height: '100px' }}
                   lineProps={(lineNumber) => {
                     let style = { display: 'block' }
                     if (highlightedLineNumbers.includes(lineNumber - 1)) {

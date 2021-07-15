@@ -7,8 +7,8 @@ import Header from './ui/Header'
 import Sidebar from './ui/Sidebar'
 import Dashboard from './dashboard/Dashboard'
 import UnmappedFiles from './unmapped-files/UnmappedFiles'
-import Company from './unmapped-files/Company'
-import File from './unmapped-files/File'
+import Company from './unmapped-files/company/Company'
+import File from './unmapped-files/file/File'
 import FileShare from './file-share/FileShare'
 
 const App = () => {

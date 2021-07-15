@@ -14,40 +14,23 @@ const Header = () => {
       <Link to="/" className="navbar-brand d-lg-none">
         Diagnostics
       </Link>
-      <ul className="navbar-nav ms-auto d-none d-lg-flex me-3">
-        <li className="nav-item">
-          <Link to="/" className="nav-link">
-            <i className="ai-file-text align-middle mt-n1 me-2"></i>
-            Documentation
-          </Link>
-        </li>
-      </ul>
       <button
-        className="navbar-toggler d-block d-lg-none ms-auto"
+        className="navbar-toggler d-block d-lg-none me-auto"
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#sidebar"
       >
         <span className="navbar-toggler-icon"></span>
       </button>
-      <div className="navbar-tool dropdown">
-        <Gravatar
-          className="navbar-tool-icon-box-img"
-          email={auth.user.profile.name}
-        />
+      <div className="navbar-tool dropdown ms-auto">
+        <Gravatar className="navbar-tool-icon-box-img" email={auth.user.profile.name} />
         <span className="navbar-tool-label dropdown-toggle">
           <small>Hello,</small>
           {auth.user.profile.full_name.split(' ')[0]}
         </span>
-        <ul
-          className="dropdown-menu dropdown-menu-end"
-          style={{ width: '1rem', top: '30px' }}
-        >
+        <ul className="dropdown-menu dropdown-menu-end" style={{ width: '1rem', top: '30px' }}>
           <li>
-            <button
-              className="dropdown-item d-flex align-items-center"
-              onClick={() => userManager.signoutRedirect()}
-            >
+            <button className="dropdown-item d-flex align-items-center" onClick={() => userManager.signoutRedirect()}>
               <i className="ai-log-out fs-base opacity-60 me-2"></i>Sign out
             </button>
           </li>
