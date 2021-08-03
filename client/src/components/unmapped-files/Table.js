@@ -134,7 +134,13 @@ const SubHeader = ({
         {displayToolbar && (
           <div className="btn-toolbar" role="toolbar" aria-label="Settings toolbar">
             <div className="btn-group me-2 mb-2" role="group" aria-label="Settings group">
-              <button type="button" className="btn btn-translucent-info btn-icon" title="Refresh">
+              <button
+                type="button"
+                className="btn btn-translucent-info btn-icon"
+                title="Refresh"
+                onClick={() => handleRefresh()}
+                disabled={disableRefreshButton}
+              >
                 <i className="ai-refresh-cw"></i>
               </button>
               <button type="button" className="btn btn-translucent-primary btn-icon" title="Retry selected">
