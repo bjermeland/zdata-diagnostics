@@ -5,7 +5,7 @@ import Spinner from '../ui/Spinner'
 const customStyles = {
   rows: {
     style: {
-      minHeight: '75px',
+      minHeight: '61px',
     },
   },
   headCells: {
@@ -32,6 +32,7 @@ const Table = ({ columns, data, onRowClicked, displayZDataCustomersFilter, displ
   const [tableLoading, setTableLoading] = useState(false)
   const [disableRefreshButton, setDisableRefreshButton] = useState(false)
 
+  //* Search for all fields in data except id
   useEffect(() => {
     setFilteredData(
       data.filter((item) => {
@@ -153,18 +154,8 @@ const SubHeader = ({
           </div>
         )}
       </div>
-      {/* <div className="col-lg-3">
-        <button type="button" className="btn btn-link" onClick={() => handleRefresh()} disabled={disableRefreshButton}>
-          <i className="ai-refresh-cw me-2"></i>
-          Refresh
-        </button>
-      </div> */}
     </div>
   )
-}
-
-const Checkbox = () => {
-  return <input className="form-check-input" type="checkbox" />
 }
 
 export default Table
