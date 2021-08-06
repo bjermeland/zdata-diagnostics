@@ -11,7 +11,9 @@ const UnmappedFiles = ({ location }) => {
   const history = useHistory()
 
   useEffect(() => {
-    const breadcrumbs = getBreadcrumbsByPath(location.pathname)
+    const breadcrumbs = getBreadcrumbsByPath(
+      location.pathname
+    )
     setCurrentPage(breadcrumbs[breadcrumbs.length - 1].name)
     setBreadcrumbs(breadcrumbs)
   }, [location, history])
@@ -22,7 +24,7 @@ const UnmappedFiles = ({ location }) => {
 
   const columns = [
     {
-      name: 'Bedrift',
+      name: 'Company',
       selector: 'company',
       sortable: true,
       cell: (row) => (
@@ -43,17 +45,20 @@ const UnmappedFiles = ({ location }) => {
       ),
     },
     {
-      name: 'Beskrivelse',
+      name: 'Description',
       selector: 'description',
       sortable: true,
       cell: (row) => (
-        <span onClick={() => handleRowClick(row)} className="fs-7">
+        <span
+          onClick={() => handleRowClick(row)}
+          className="fs-7"
+        >
           {row.description}
         </span>
       ),
     },
     {
-      name: 'Filtyper',
+      name: 'File Types',
       selector: 'fileTypes',
       sortable: true,
     },
@@ -63,12 +68,7 @@ const UnmappedFiles = ({ location }) => {
       sortable: true,
     },
     {
-      name: 'Regnskapsfører',
-      selector: 'accountant',
-      sortable: true,
-    },
-    {
-      name: 'Sist Mottatt',
+      name: 'Last Received',
       selector: 'lastReceived',
       sortable: true,
     },
@@ -82,7 +82,6 @@ const UnmappedFiles = ({ location }) => {
       description: 'Venter på onboarding fra Uni.',
       fileTypes: 'C053, C54C',
       bic: 'SPRNO22',
-      accountant: 'Borgund Regnskap AS',
       lastReceived: '22/04/2021 08:00',
       isZDataCustomer: true,
     },
@@ -93,7 +92,6 @@ const UnmappedFiles = ({ location }) => {
       description: 'Setter beskrivelse',
       fileTypes: 'C051',
       bic: 'NONO20',
-      accountant: 'HK regnskap',
       lastReceived: '22/04/2021 08:00',
       isZDataCustomer: false,
     },
@@ -104,7 +102,6 @@ const UnmappedFiles = ({ location }) => {
       description: 'Boarding',
       fileTypes: 'C053, C54C',
       bic: 'SPRNO22',
-      accountant: 'Mpr gruppen',
       lastReceived: '22/04/2021 08:00',
       isZDataCustomer: false,
     },
@@ -115,7 +112,6 @@ const UnmappedFiles = ({ location }) => {
       description: 'Venter på onboarding fra Uni.',
       fileTypes: 'C053, C54C',
       bic: 'APAP50',
-      accountant: 'Borgund Regnskap AS',
       lastReceived: '21/04/2021 08:00',
       isZDataCustomer: false,
     },
@@ -126,7 +122,6 @@ const UnmappedFiles = ({ location }) => {
       description: 'Venter på onboarding fra Uni.',
       fileTypes: 'CS50',
       bic: 'FHFH18',
-      accountant: 'Sand økonomi',
       lastReceived: '20/04/2021 08:00',
       isZDataCustomer: true,
     },
@@ -137,7 +132,6 @@ const UnmappedFiles = ({ location }) => {
       description: 'Venter på onboarding fra Uni.',
       fileTypes: 'C053, C54C',
       bic: 'SPRNO22',
-      accountant: 'VIEW Frilans',
       lastReceived: '28/06/2021 08:00',
       isZDataCustomer: true,
     },
@@ -148,7 +142,6 @@ const UnmappedFiles = ({ location }) => {
       description: 'Venter på onboarding fra Uni.',
       fileTypes: 'C053, C54C',
       bic: 'SPRNO22',
-      accountant: 'Borgund Regnskap AS',
       lastReceived: '30/04/2021 08:00',
       isZDataCustomer: false,
     },
@@ -159,7 +152,6 @@ const UnmappedFiles = ({ location }) => {
       description: 'Venter på onboarding fra Uni.',
       fileTypes: 'C053, C54C',
       bic: 'SPRNO22',
-      accountant: 'Borgund Regnskap AS',
       lastReceived: '30/04/2021 08:00',
       isZDataCustomer: false,
     },
@@ -170,7 +162,6 @@ const UnmappedFiles = ({ location }) => {
       description: 'Venter på onboarding fra Uni.',
       fileTypes: 'C053, C54C',
       bic: 'SPRNO22',
-      accountant: 'Borgund Regnskap AS',
       lastReceived: '30/04/2021 08:00',
       isZDataCustomer: false,
     },
@@ -181,7 +172,6 @@ const UnmappedFiles = ({ location }) => {
       description: 'Venter på onboarding fra Uni.',
       fileTypes: 'C053, C54C',
       bic: 'SPRNO22',
-      accountant: 'Borgund Regnskap AS',
       lastReceived: '30/04/2021 08:00',
       isZDataCustomer: false,
     },
@@ -192,7 +182,6 @@ const UnmappedFiles = ({ location }) => {
       description: 'Venter på onboarding fra Uni.',
       fileTypes: 'C053, C54C',
       bic: 'SPRNO22',
-      accountant: 'Borgund Regnskap AS',
       lastReceived: '30/04/2021 08:00',
       isZDataCustomer: false,
     },
@@ -203,7 +192,6 @@ const UnmappedFiles = ({ location }) => {
       description: 'Venter på onboarding fra Uni.',
       fileTypes: 'C053, C54C',
       bic: 'SPRNO22',
-      accountant: 'Borgund Regnskap AS',
       lastReceived: '30/04/2021 08:00',
       isZDataCustomer: false,
     },
@@ -212,7 +200,10 @@ const UnmappedFiles = ({ location }) => {
   return currentPage ? (
     <section>
       <div className="border-bottom pt-5 pb-2 mt-2 mb-4">
-        <Breadcrumbs currentPage={currentPage} items={breadcrumbs} />
+        <Breadcrumbs
+          currentPage={currentPage}
+          items={breadcrumbs}
+        />
         <h1 className="mt-lg-4 pt-2 fs-2">{currentPage}</h1>
       </div>
       <div className="row">

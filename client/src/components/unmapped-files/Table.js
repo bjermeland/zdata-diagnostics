@@ -24,13 +24,24 @@ const conditionalRowStyles = [
   },
 ]
 
-const Table = ({ columns, data, onRowClicked, displayZDataCustomersFilter, displayToolbar }) => {
+const Table = ({
+  columns,
+  data,
+  onRowClicked,
+  displayZDataCustomersFilter,
+  displayToolbar,
+}) => {
+  const [loading, setLoading] = useState(true)
   const [filteredData, setFilteredData] = useState(data)
   const [searchQuery, setSearchQuery] = useState('')
-  const [filterZDataCustomers, setFilterZDataCustomers] = useState(false)
+  const [filterZDataCustomers, setFilterZDataCustomers] =
+    useState(false)
 
   const [tableLoading, setTableLoading] = useState(false)
-  const [disableRefreshButton, setDisableRefreshButton] = useState(false)
+  const [disableRefreshButton, setDisableRefreshButton] =
+    useState(false)
+
+  const [totalRows, setTotalRows] = useState(25)
 
   //* Search for all fields in data except id
   useEffect(() => {
@@ -38,14 +49,30 @@ const Table = ({ columns, data, onRowClicked, displayZDataCustomersFilter, displ
       data.filter((item) => {
         return Object.keys(item)
           .filter((k) => k !== 'id')
-          .some((k) => item[k].toString().toLowerCase().includes(searchQuery.toLowerCase()))
+          .some((k) =>
+            item[k]
+              .toString()
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase())
+          )
       })
     )
   }, [searchQuery, setSearchQuery, data])
 
+  //* Retrieves total rows saved in LocalStorage and checks if it is a valid number
+  useEffect(() => {
+    const totalRows = localStorage.getItem('total-rows')
+    if (!Number.isNaN(Number.parseInt(totalRows))) {
+      setTotalRows(totalRows)
+    }
+    setLoading(false)
+  }, [])
+
   useEffect(() => {
     if (filterZDataCustomers) {
-      setFilteredData(data.filter((item) => item.isZDataCustomer))
+      setFilteredData(
+        data.filter((item) => item.isZDataCustomer)
+      )
     } else {
       setFilteredData(data)
     }
@@ -62,7 +89,11 @@ const Table = ({ columns, data, onRowClicked, displayZDataCustomersFilter, displ
     }, 2000)
   }
 
-  return (
+  const handleChangeRowsPerPage = (totalRows) => {
+    localStorage.setItem('total-rows', totalRows)
+  }
+
+  return !loading ? (
     <DataTable
       columns={columns}
       data={filteredData}
@@ -72,6 +103,11 @@ const Table = ({ columns, data, onRowClicked, displayZDataCustomersFilter, displ
       progressPending={tableLoading}
       progressComponent={<Spinner />}
       onRowClicked={(row) => onRowClicked(row)}
+      paginationPerPage={totalRows}
+      paginationRowsPerPageOptions={[25, 50, 150, 300, 500]}
+      onChangeRowsPerPage={(totalRows) =>
+        handleChangeRowsPerPage(totalRows)
+      }
       highlightOnHover
       pointerOnHover
       pagination
@@ -80,7 +116,9 @@ const Table = ({ columns, data, onRowClicked, displayZDataCustomersFilter, displ
       subHeaderAlign="left"
       subHeaderComponent={
         <SubHeader
-          displayZDataCustomersFilter={displayZDataCustomersFilter}
+          displayZDataCustomersFilter={
+            displayZDataCustomersFilter
+          }
           displayToolbar={displayToolbar}
           setSearchQuery={setSearchQuery}
           setFilterZDataCustomers={setFilterZDataCustomers}
@@ -89,6 +127,8 @@ const Table = ({ columns, data, onRowClicked, displayZDataCustomersFilter, displ
         />
       }
     />
+  ) : (
+    <Spinner />
   )
 }
 
@@ -104,7 +144,10 @@ const SubHeader = ({
     <div className="row w-100" id="table-subheader">
       <div className="col-lg-9">
         <div className="input-group mb-3">
-          <span className="input-group-text" id="search-icon">
+          <span
+            className="input-group-text"
+            id="search-icon"
+          >
             <i className="ai-search fs-4"></i>
           </span>
           <input
@@ -124,17 +167,31 @@ const SubHeader = ({
               className="form-check-input"
               type="checkbox"
               id="zdata-customers"
-              onClick={(e) => setFilterZDataCustomers(e.target.checked)}
+              onClick={(e) =>
+                setFilterZDataCustomers(e.target.checked)
+              }
               role="button"
             />
-            <label className="form-check-label" htmlFor="zdata-customers" role="button">
+            <label
+              className="form-check-label"
+              htmlFor="zdata-customers"
+              role="button"
+            >
               Kun ZData Kunder
             </label>
           </div>
         )}
         {displayToolbar && (
-          <div className="btn-toolbar" role="toolbar" aria-label="Settings toolbar">
-            <div className="btn-group me-2 mb-2" role="group" aria-label="Settings group">
+          <div
+            className="btn-toolbar"
+            role="toolbar"
+            aria-label="Settings toolbar"
+          >
+            <div
+              className="btn-group me-2 mb-2"
+              role="group"
+              aria-label="Settings group"
+            >
               <button
                 type="button"
                 className="btn btn-translucent-info btn-icon"
@@ -144,10 +201,18 @@ const SubHeader = ({
               >
                 <i className="ai-refresh-cw"></i>
               </button>
-              <button type="button" className="btn btn-translucent-primary btn-icon" title="Retry selected">
+              <button
+                type="button"
+                className="btn btn-translucent-primary btn-icon"
+                title="Retry selected"
+              >
                 <i className="ai-download"></i>
               </button>
-              <button type="button" className="btn btn-translucent-danger btn-icon" title="Delete selected">
+              <button
+                type="button"
+                className="btn btn-translucent-danger btn-icon"
+                title="Delete selected"
+              >
                 <i className="ai-trash-2"></i>
               </button>
             </div>

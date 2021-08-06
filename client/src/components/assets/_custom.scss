@@ -16,6 +16,10 @@
   justify-content: space-evenly;
 }
 
+.fw-500 {
+  font-weight: 500;
+}
+
 //* End General */
 
 //* Queue */
@@ -41,7 +45,7 @@
 
 #table {
   #spinner {
-    margin-top: 5em;
+    margin: 5em 0;
   }
 
   #table-subheader {
@@ -64,6 +68,10 @@
 
   input[type='checkbox'] {
     @extend .form-check-input;
+  }
+
+  .rdt_Pagination select {
+    min-width: 35px;
   }
 }
 
