@@ -1,4 +1,8 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import AuthCallback from '../tools/AuthCallback'
 import CheckAuth from '../tools/CheckAuth'
@@ -16,21 +20,29 @@ const App = () => {
     <Router>
       <CheckAuth>
         <Routes />
-        <Route exact path="/oidc-callback" component={AuthCallback} />
+        <Route
+          exact
+          path="/oidc-callback"
+          component={AuthCallback}
+        />
       </CheckAuth>
-      <Route exact path="/share/:id" component={FileShare} />
+      <Route
+        exact
+        path="/share/:id"
+        component={FileShare}
+      />
     </Router>
   )
 }
 
 const UnmappedFilesRoutes = [
-  'AgreementFileQueues',
-  'DnbConnector',
-  'DnbSignedConnector',
-  'EvryConnector',
-  'NordeaConnector',
-  'SdcConnector',
-  'SebConnector',
+  'dnb',
+  'dnb-signed',
+  'evry',
+  'nordea',
+  'sdc',
+  'eika',
+  'seb',
 ]
 
 const Routes = () => {
@@ -42,13 +54,29 @@ const Routes = () => {
           <Header />
           <Sidebar />
           <Route exact path="/" component={Dashboard} />
-          <Route exact path="/unmapped-files" component={UnmappedFiles} />
+          <Route
+            exact
+            path="/unmapped-files"
+            component={UnmappedFiles}
+          />
           {UnmappedFilesRoutes.map((route) => {
             return (
               <div key={route}>
-                <Route exact path={`/unmapped-files/${route}`} component={UnmappedFiles} />
-                <Route exact path={`/unmapped-files/${route}/:orgnumber`} component={Company} />
-                <Route excat path={`/unmapped-files/${route}/:orgnumber/:id`} component={File} />
+                <Route
+                  exact
+                  path={`/unmapped-files/${route}`}
+                  component={UnmappedFiles}
+                />
+                <Route
+                  exact
+                  path={`/unmapped-files/${route}/:orgnumber`}
+                  component={Company}
+                />
+                <Route
+                  excat
+                  path={`/unmapped-files/${route}/:orgnumber/:id`}
+                  component={File}
+                />
               </div>
             )
           })}

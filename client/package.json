@@ -9,6 +9,7 @@
   "dependencies": {
     "@popperjs/core": "^2.9.2",
     "bootstrap": "^5.0.1",
+    "dayjs": "^1.10.6",
     "oidc-client": "^1.11.5",
     "react": "^17.0.2",
     "react-data-table-component": "^6.11.7",
@@ -17,6 +18,7 @@
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-switch": "^6.0.0",
     "react-syntax-highlighter": "^15.4.3",
     "react-syntax-highlighter-virtualized-renderer": "^1.1.0",
     "react-toastify": "^7.0.4",

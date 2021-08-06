@@ -22,6 +22,16 @@ const UnmappedFiles = ({ location }) => {
     history.push(`${location.pathname}/${row.orgNumber}`)
   }
 
+  const formatName = (name) => {
+    return name
+      .split(' ')
+      .map((word) =>
+        word.length === 3
+          ? `${word.toUpperCase()} `
+          : `${word} `
+      )
+  }
+
   const columns = [
     {
       name: 'Company',
@@ -204,7 +214,9 @@ const UnmappedFiles = ({ location }) => {
           currentPage={currentPage}
           items={breadcrumbs}
         />
-        <h1 className="mt-lg-4 pt-2 fs-2">{currentPage}</h1>
+        <h1 className="mt-lg-4 pt-2 fs-2 text-capitalize">
+          {formatName(currentPage)}
+        </h1>
       </div>
       <div className="row">
         <div className="col-lg-12 card pt-3" id="table">

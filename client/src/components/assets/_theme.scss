@@ -1,0 +1,13 @@
+//* Dark theme */
+
+@media (prefers-color-scheme: dark) {
+  $body-bg: #000;
+  $body-color: #fff;
+}
+
+@media (prefers-color-scheme: light) {
+  $body-bg: #000;
+  $body-color: #fff;
+}
+
+//* End Dark theme */

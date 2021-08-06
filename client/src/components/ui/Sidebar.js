@@ -1,13 +1,16 @@
+import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import Switch from 'react-switch'
 import userManager from '../../tools/userManager'
 
 const sidebarItems = [
-  { name: 'DnbConnector', fileCount: 62 },
-  { name: 'DnbSignedConnector', fileCount: 120 },
-  { name: 'EvryConnector', fileCount: 137 },
-  { name: 'NordeaConnector', fileCount: 482 },
-  { name: 'SdcConnector', fileCount: 107 },
-  { name: 'SebConnector', fileCount: 15 },
+  { name: 'DNB', fileCount: 62 },
+  { name: 'DNB Signed', fileCount: 120 },
+  { name: 'Evry', fileCount: 137 },
+  { name: 'Nordea', fileCount: 482 },
+  { name: 'SDC', fileCount: 107 },
+  { name: 'Eika', fileCount: 107 },
+  { name: 'SEB', fileCount: 15 },
   { name: 'Support Cases', fileCount: 4 },
 ]
 
@@ -39,6 +42,7 @@ const widgetItems = [
 ]
 
 const Sidebar = () => {
+  const [darkMode, setDarkMode] = useState(false)
   return (
     <aside
       className="offcanvas offcanvas-expand bg-dark"
@@ -125,13 +129,40 @@ const Sidebar = () => {
         <h6 className="text-light pt-3 pb-2 border-bottom border-light">
           Account
         </h6>
-        <nav className="widget-nav nav nav-light">
+        <nav className="widget-nav nav nav-light d-block">
           <button
             className="btn btn-link nav-link fs-sm text-decoration-none-hover"
             onClick={() => userManager.signoutRedirect()}
           >
             Sign out
           </button>
+          <label className="fs-sm nav-link mt-6">
+            <Switch
+              onChange={(status) => setDarkMode(status)}
+              className="react-switch"
+              checked={darkMode}
+              offColor="#e3e3ee"
+              onColor="#766df4"
+              height={22}
+              width={45}
+              handleDiameter={15}
+              uncheckedIcon={false}
+              checkedIcon={false}
+            />
+          </label>
+          {/* <div class="form-check form-switch">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="customSwitch2"
+            />
+            <label
+              class="form-check-label"
+              for="customSwitch2"
+            >
+              Toggle this switch element
+            </label>
+          </div> */}
         </nav>
       </div>
     </aside>
