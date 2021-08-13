@@ -2,23 +2,17 @@ import { Link } from 'react-router-dom'
 import { isGuid } from '../../utils/pagetitles'
 
 const formatOrganizationNumber = (orgNumber) => {
-  return orgNumber.replace(
-    /(\d)(?=(\d\d\d)+(?!\d))/g,
-    '$1 '
-  )
+  return orgNumber.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1 ')
 }
 
 const formatName = (name) => {
   return name
     .split(' ')
-    .map((word) =>
-      word.length === 3
-        ? `${word.toUpperCase()} `
-        : `${word} `
-    )
+    .map((word) => (word.length === 3 ? `${word.toUpperCase()} ` : `${word} `))
 }
 
 const Breadcrumbs = ({ currentPage, items }) => {
+  console.log(items)
   return (
     <nav className="pt-5" aria-label="breadcrumb">
       <ol className="breadcrumb">
@@ -41,11 +35,7 @@ const Breadcrumbs = ({ currentPage, items }) => {
           } else {
             return (
               <li key={index} className="breadcrumb-item">
-                {item.href ? (
-                  <Link to={item.href}>{name}</Link>
-                ) : (
-                  name
-                )}
+                {item.href ? <Link to={item.href}>{name}</Link> : name}
               </li>
             )
           }

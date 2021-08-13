@@ -5,11 +5,19 @@ export const getBreadcrumbsByPath = (path) => {
   return pages
     .filter((page) => page !== '')
     .map((page, index) => {
+      const urlParts = pages.slice(1, index + 2)
       if (!isGuid(page)) page = page.replace('-', ' ')
+      //* If URl is support cases, change name to firm instead of showing 'File' / GUID
+      else if (
+        urlParts.some((part) => part === 'support-cases') &&
+        urlParts.length > 2
+      ) {
+        page = 'Sparebank 1 SMN' //? temporary
+      }
 
       return {
         name: page,
-        href: `/${pages.slice(1, index + 2).join('/')}`,
+        href: `/${urlParts.join('/')}`,
       }
     })
 }

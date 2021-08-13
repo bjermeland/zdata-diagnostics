@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router'
-import { getBreadcrumbsByPath } from '../../utils/pagetitles'
-import Breadcrumbs from '../ui/Breadcrumbs'
-import Spinner from '../ui/Spinner'
-import Table from './Table'
+import { getBreadcrumbsByPath } from '../../../utils/pagetitles'
+import SupportCaseHeader from './Header'
+import Spinner from '../../ui/Spinner'
+import Table from '../Table'
 
-const UnmappedFiles = ({ location }) => {
+const SupportCase = ({ location }) => {
   const [currentPage, setCurrentPage] = useState(null)
   const [breadcrumbs, setBreadcrumbs] = useState([])
   const history = useHistory()
@@ -14,21 +14,12 @@ const UnmappedFiles = ({ location }) => {
     const breadcrumbs = getBreadcrumbsByPath(location.pathname)
     setCurrentPage(breadcrumbs[breadcrumbs.length - 1].name)
     setBreadcrumbs(breadcrumbs)
-  }, [location, history])
+  }, [location])
 
-  const handleRowClick = (row) => {
-    history.push(`${location.pathname}/${row.orgNumber}`)
-  }
+  //* ---
 
-  //* If name exists of 3 letters, change all to uppercase
-  //* For example. SEB, SDC
-  const formatName = (name) => {
-    return name
-      .split(' ')
-      .map((word) =>
-        word.length === 3 ? `${word.toUpperCase()} ` : `${word} `
-      )
-  }
+  const handleRowClick = (row) =>
+    history.push(`/unmapped-files/evry/${row.orgNumber}`)
 
   const columns = [
     {
@@ -204,19 +195,17 @@ const UnmappedFiles = ({ location }) => {
 
   return currentPage ? (
     <section>
-      <div className="border-bottom pt-5 pb-2 mt-2 mb-4">
-        <Breadcrumbs currentPage={currentPage} items={breadcrumbs} />
-        <h1 className="mt-lg-4 pt-2 fs-2 text-capitalize">
-          {formatName(currentPage)}
-        </h1>
-      </div>
+      <SupportCaseHeader
+        currentPage={'Sparebank 1 SMN'} //* change to currentPage, and to database search for name with guid
+        breadcrumbs={breadcrumbs}
+        isDetailedPage
+      />
       <div className="row">
-        <div className="col-lg-12 card pt-3" id="table">
+        <div className="col-lg-12 card d-block border-primary pt-3" id="table">
           <Table
             columns={columns}
             data={data}
             onRowClicked={(row) => handleRowClick(row)}
-            displayZDataCustomersFilter
           />
         </div>
       </div>
@@ -226,4 +215,4 @@ const UnmappedFiles = ({ location }) => {
   )
 }
 
-export default UnmappedFiles
+export default SupportCase

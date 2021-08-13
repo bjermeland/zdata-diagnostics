@@ -1,8 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import AuthCallback from '../tools/AuthCallback'
 import CheckAuth from '../tools/CheckAuth'
@@ -14,23 +10,17 @@ import UnmappedFiles from './unmapped-files/UnmappedFiles'
 import Company from './unmapped-files/company/Company'
 import File from './unmapped-files/file/File'
 import FileShare from './file-share/FileShare'
+import SupportCases from './unmapped-files/supportcases/SupportCases'
+import SupportCase from './unmapped-files/supportcases/SupportCase'
 
 const App = () => {
   return (
     <Router>
       <CheckAuth>
         <Routes />
-        <Route
-          exact
-          path="/oidc-callback"
-          component={AuthCallback}
-        />
+        <Route exact path="/oidc-callback" component={AuthCallback} />
       </CheckAuth>
-      <Route
-        exact
-        path="/share/:id"
-        component={FileShare}
-      />
+      <Route exact path="/share/:id" component={FileShare} />
     </Router>
   )
 }
@@ -54,11 +44,7 @@ const Routes = () => {
           <Header />
           <Sidebar />
           <Route exact path="/" component={Dashboard} />
-          <Route
-            exact
-            path="/unmapped-files"
-            component={UnmappedFiles}
-          />
+          <Route exact path="/unmapped-files" component={UnmappedFiles} />
           {UnmappedFilesRoutes.map((route) => {
             return (
               <div key={route}>
@@ -80,6 +66,16 @@ const Routes = () => {
               </div>
             )
           })}
+          <Route
+            exact
+            path="/unmapped-files/support-cases"
+            component={SupportCases}
+          />
+          <Route
+            exact
+            path="/unmapped-files/support-cases/:id"
+            component={SupportCase}
+          />
         </div>
       </section>
     </main>

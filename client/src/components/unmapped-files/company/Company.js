@@ -29,7 +29,9 @@ const Company = ({ location }) => {
   const history = useHistory()
 
   useEffect(() => {
-    const breadcrumbs = getBreadcrumbsByPath(location.pathname)
+    const breadcrumbs = getBreadcrumbsByPath(
+      location.pathname
+    )
     setCurrentPage(breadcrumbs[breadcrumbs.length - 1].name)
     setBreadcrumbs(breadcrumbs)
   }, [location])
@@ -46,7 +48,8 @@ const Company = ({ location }) => {
     })
   }, [location.pathname])
 
-  const handleRowClick = (row) => history.push(`${location.pathname}/${row.id}`)
+  const handleRowClick = (row) =>
+    history.push(`${location.pathname}/${row.id}`)
 
   const columns = [
     {
@@ -108,10 +111,22 @@ const Company = ({ location }) => {
 
   return currentPage ? (
     <section>
-      <Header currentPage={currentPage} breadcrumbs={breadcrumbs} bank={bank} />
+      <Header
+        currentPage={currentPage}
+        breadcrumbs={breadcrumbs}
+        bank={bank}
+      />
       <div className="row">
-        <div className="col-lg-8 card d-block border-primary pt-3" id="table">
-          <Table columns={columns} data={data} onRowClicked={(row) => handleRowClick(row)} displayToolbar />
+        <div
+          className="col-lg-8 card d-block border-primary pt-3"
+          id="table"
+        >
+          <Table
+            columns={columns}
+            data={data}
+            onRowClicked={(row) => handleRowClick(row)}
+            displayToolbar
+          />
         </div>
         <div className="col-lg-4 mb-2">
           <Description />

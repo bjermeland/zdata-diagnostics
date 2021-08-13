@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import DataTable from 'react-data-table-component'
 import Spinner from '../ui/Spinner'
+import SupportCaseModal from './SupportCaseModal'
 
 const customStyles = {
   rows: {
@@ -30,16 +31,15 @@ const Table = ({
   onRowClicked,
   displayZDataCustomersFilter,
   displayToolbar,
+  displaySupportCasesToolbar,
 }) => {
   const [loading, setLoading] = useState(true)
   const [filteredData, setFilteredData] = useState(data)
   const [searchQuery, setSearchQuery] = useState('')
-  const [filterZDataCustomers, setFilterZDataCustomers] =
-    useState(false)
+  const [filterZDataCustomers, setFilterZDataCustomers] = useState(false)
 
   const [tableLoading, setTableLoading] = useState(false)
-  const [disableRefreshButton, setDisableRefreshButton] =
-    useState(false)
+  const [disableRefreshButton, setDisableRefreshButton] = useState(false)
 
   const [totalRows, setTotalRows] = useState(25)
 
@@ -50,10 +50,7 @@ const Table = ({
         return Object.keys(item)
           .filter((k) => k !== 'id')
           .some((k) =>
-            item[k]
-              .toString()
-              .toLowerCase()
-              .includes(searchQuery.toLowerCase())
+            item[k].toString().toLowerCase().includes(searchQuery.toLowerCase())
           )
       })
     )
@@ -62,17 +59,15 @@ const Table = ({
   //* Retrieves total rows saved in LocalStorage and checks if it is a valid number
   useEffect(() => {
     const totalRows = localStorage.getItem('total-rows')
-    if (!Number.isNaN(Number.parseInt(totalRows))) {
-      setTotalRows(totalRows)
+    if (!isNaN(parseInt(totalRows))) {
+      setTotalRows(parseInt(totalRows))
     }
     setLoading(false)
   }, [])
 
   useEffect(() => {
     if (filterZDataCustomers) {
-      setFilteredData(
-        data.filter((item) => item.isZDataCustomer)
-      )
+      setFilteredData(data.filter((item) => item.isZDataCustomer))
     } else {
       setFilteredData(data)
     }
@@ -105,9 +100,7 @@ const Table = ({
       onRowClicked={(row) => onRowClicked(row)}
       paginationPerPage={totalRows}
       paginationRowsPerPageOptions={[25, 50, 150, 300, 500]}
-      onChangeRowsPerPage={(totalRows) =>
-        handleChangeRowsPerPage(totalRows)
-      }
+      onChangeRowsPerPage={(totalRows) => handleChangeRowsPerPage(totalRows)}
       highlightOnHover
       pointerOnHover
       pagination
@@ -116,10 +109,9 @@ const Table = ({
       subHeaderAlign="left"
       subHeaderComponent={
         <SubHeader
-          displayZDataCustomersFilter={
-            displayZDataCustomersFilter
-          }
+          displayZDataCustomersFilter={displayZDataCustomersFilter}
           displayToolbar={displayToolbar}
+          displaySupportCasesToolbar={displaySupportCasesToolbar}
           setSearchQuery={setSearchQuery}
           setFilterZDataCustomers={setFilterZDataCustomers}
           handleRefresh={handleRefresh}
@@ -135,6 +127,7 @@ const Table = ({
 const SubHeader = ({
   displayZDataCustomersFilter,
   displayToolbar,
+  displaySupportCasesToolbar,
   setSearchQuery,
   setFilterZDataCustomers,
   handleRefresh,
@@ -142,12 +135,9 @@ const SubHeader = ({
 }) => {
   return (
     <div className="row w-100" id="table-subheader">
-      <div className="col-lg-9">
+      <div className="col-lg-7">
         <div className="input-group mb-3">
-          <span
-            className="input-group-text"
-            id="search-icon"
-          >
+          <span className="input-group-text" id="search-icon">
             <i className="ai-search fs-4"></i>
           </span>
           <input
@@ -160,25 +150,65 @@ const SubHeader = ({
           />
         </div>
       </div>
-      <div className="col-lg-3">
+      <div className="col-lg-5">
         {displayZDataCustomersFilter && (
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="zdata-customers"
-              onClick={(e) =>
-                setFilterZDataCustomers(e.target.checked)
-              }
-              role="button"
-            />
-            <label
-              className="form-check-label"
-              htmlFor="zdata-customers"
-              role="button"
-            >
-              Kun ZData Kunder
-            </label>
+          <div className="row">
+            <div className="col-lg">
+              <div
+                className="btn-toolbar"
+                role="toolbar"
+                aria-label="Settings toolbar"
+              >
+                <div
+                  className="btn-group me-2 mb-2"
+                  role="group"
+                  aria-label="Settings group"
+                >
+                  <button
+                    type="button"
+                    className="btn btn-translucent-info btn-icon"
+                    title="Refresh"
+                    onClick={() => handleRefresh()}
+                    disabled={disableRefreshButton}
+                  >
+                    <i className="ai-refresh-cw"></i>
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-translucent-primary btn-icon"
+                    title="Retry selected"
+                  >
+                    <i className="ai-download"></i>
+                  </button>
+                  <SupportCaseModal />
+                  <button
+                    type="button"
+                    className="btn btn-translucent-danger btn-icon"
+                    title="Delete selected"
+                  >
+                    <i className="ai-trash-2"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg">
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  id="zdata-customers"
+                  onClick={(e) => setFilterZDataCustomers(e.target.checked)}
+                  role="button"
+                />
+                <label
+                  className="form-check-label"
+                  htmlFor="zdata-customers"
+                  role="button"
+                >
+                  ZData Customers
+                </label>
+              </div>
+            </div>
           </div>
         )}
         {displayToolbar && (
@@ -215,6 +245,51 @@ const SubHeader = ({
               >
                 <i className="ai-trash-2"></i>
               </button>
+            </div>
+          </div>
+        )}
+        {displaySupportCasesToolbar && (
+          <div className="row">
+            <div className="col-lg">
+              <div
+                className="btn-toolbar"
+                role="toolbar"
+                aria-label="Settings toolbar"
+              >
+                <div
+                  className="btn-group me-2 mb-2"
+                  role="group"
+                  aria-label="Settings group"
+                >
+                  <button
+                    type="button"
+                    className="btn btn-translucent-info btn-icon"
+                    title="Refresh"
+                    onClick={() => handleRefresh()}
+                    disabled={disableRefreshButton}
+                  >
+                    <i className="ai-refresh-cw"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg">
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  id="zdata-customers"
+                  onClick={(e) => setFilterZDataCustomers(e.target.checked)}
+                  role="button"
+                />
+                <label
+                  className="form-check-label"
+                  htmlFor="zdata-customers"
+                  role="button"
+                >
+                  My Cases
+                </label>
+              </div>
             </div>
           </div>
         )}
