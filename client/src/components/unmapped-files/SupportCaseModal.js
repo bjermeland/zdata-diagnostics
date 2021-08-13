@@ -15,11 +15,13 @@ const SupportCaseModal = () => {
   }, [])
 
   const partyIds = [
-    '123 456 789',
-    '123 456 789',
-    '123 456 789',
-    '123 456 789',
-    '123 456 789',
+    '123456789',
+    '123456789',
+    '123456789',
+    '123456789',
+    '123456789',
+    '123456789',
+    '123456789',
   ]
 
   return (
@@ -119,8 +121,17 @@ const SupportCaseModal = () => {
                     <div>
                       {partyIds.map((partyId) => {
                         return (
-                          <div className="badge bg-dark p-2 mb-2">
-                            <span>{partyId}</span>
+                          <div className="badge bg-dark p-2 mb-2 ms-4">
+                            <span>
+                              {partyId.replace(/(.{3})/g, '$1 ').trim()}
+                            </span>
+                            <button
+                              type="button"
+                              className="btn btn-link badge text-danger float-end p-0"
+                              onClick={() => console.log(`remove ${partyId}`)}
+                            >
+                              <i className="ai-x text-danger ps-2" />
+                            </button>
                           </div>
                         )
                       })}
