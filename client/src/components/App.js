@@ -12,6 +12,7 @@ import File from './unmapped-files/file/File'
 import FileShare from './file-share/FileShare'
 import SupportCases from './unmapped-files/supportcases/SupportCases'
 import SupportCase from './unmapped-files/supportcases/SupportCase'
+import AgreementFileQueues from './unmapped-files/agreementfilequeues/AgreementFileQueues'
 
 const App = () => {
   return (
@@ -44,7 +45,23 @@ const Routes = () => {
           <Header />
           <Sidebar />
           <Route exact path="/" component={Dashboard} />
-          <Route exact path="/unmapped-files" component={UnmappedFiles} />
+
+          <Route
+            exact
+            path={`/agreement-file-queues`}
+            component={AgreementFileQueues}
+          />
+          <Route
+            exact
+            path={`/agreement-file-queues/:orgnumber`}
+            component={Company}
+          />
+          <Route
+            excat
+            path={`/agreement-file-queues/:orgnumber/:id`}
+            component={File}
+          />
+
           {UnmappedFilesRoutes.map((route) => {
             return (
               <div key={route}>

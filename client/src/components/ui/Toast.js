@@ -2,7 +2,12 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.min.css'
 
 const ToastComponent = ({ closeToast, toastProps, title, body }) => (
-  <div className="toast fade show text-success" role="alert" aria-live="assertive" aria-atomic="true">
+  <div
+    className="toast fade show text-success"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
     <div className={`toast-header ${!body && 'border-0'}`}>
       <i className="ai-check-circle me-2"></i>
       <span className="me-auto">{title}</span>

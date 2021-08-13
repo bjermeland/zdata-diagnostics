@@ -1,11 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import Spinner from '../ui/Spinner'
-
-import logo from '../assets/images/zdata-logo.svg'
-
-import SyntaxHighlighter from 'react-syntax-highlighter'
-import virtualizedRenderer from 'react-syntax-highlighter-virtualized-renderer'
-import { vs2015 } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import Header from './Header'
+import Toolbar from './Toolbar'
+import FileContent from './FileContent'
 import format from 'xml-formatter'
 
 const xml = `<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:camt.053.001.02">
@@ -379,110 +376,30 @@ const FileShare = () => {
   }
 
   return true ? (
-    <main className="container-fluid h-100 bg-dark text-white" id="file-share-container">
+    <main
+      className="container-fluid h-100 bg-dark text-white"
+      id="file-share-container"
+    >
       <div className="col-xxl-12">
         <section>
-          <div className="border-bottom border-light pt-5 pb-1 mb-4 row">
-            <div className="col-lg-3">
-              <img className="w-50 logo-responsive" src={logo} alt="ZData Logo" />
-              <small className="py-3 d-block">
-                Noen fra ZData har delt denne bankfilen med deg.
-                <br />
-                Trykk på "Fullfør Fildeling" for å slette linktilgangen.
-              </small>
-            </div>
-            <div className="col-lg-6">
-              <div className="card bg-dark border-light border-3 mb-3">
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-lg-7 mb-3">
-                      <h5 className="card-title fs-sm text-ccc text-truncate">Name</h5>
-                      <p className="card-text fs-sm">P.00921643497.000.C053.20210706064739-E2C6G.DAT</p>
-                    </div>
-                    <div className="col-lg-2 mb-3">
-                      <h5 className="card-title fs-sm text-ccc">Format</h5>
-                      <p className="card-text fs-sm">Camt053</p>
-                    </div>
-                    <div className="col-lg-3">
-                      <h5 className="card-title fs-sm text-ccc">Created</h5>
-                      <p className="card-text fs-sm">07/08/2021 06:47:41</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-3">
-              <div className="card bg-dark border-light border-3 mb-3">
-                <div className="card-body">
-                  <h5 className="card-title fs-sm text-ccc">Company</h5>
-                  <p className="card-text fs-sm">Bedrift Alpha AS (999 473 200)</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Header />
           <div className="row" id="code-container">
-            <div className="col-lg-12 card d-block border-0 code-container-dark pb-2" id="table">
-              <div className="toolbar">
-                <div className="row pt-3">
-                  <div className="col-lg-8">
-                    <div className="input-group mb-3">
-                      <span className="input-group-text">
-                        <i className="ai-search fs-xl"></i>
-                      </span>
-                      <input
-                        className="form-control"
-                        type="text"
-                        id="search-in-file"
-                        placeholder="Search in file"
-                        onChange={(e) => handleSearchInput(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-lg-4">
-                    <div className="row text-center text-decoration-none">
-                      <div className="col-lg-6 d-flex justify-content-evenly">
-                        <button type="button" className="btn btn-dark btn-icon" onClick={() => handleShareButton()}>
-                          <i className="ai-grid"></i>
-                        </button>
-                        <button type="button" className="btn btn-dark btn-icon" onClick={() => handleCopyButton()}>
-                          <i className="ai-copy"></i>
-                        </button>
-                        <button type="button" className="btn btn-dark btn-icon" onClick={() => handleDownloadButton()}>
-                          <i className="ai-download"></i>
-                        </button>
-                      </div>
-                      <div className="col-lg-6">
-                        <button
-                          type="button"
-                          className="btn btn-danger opacity-90 btn-sm d-flex justify-content-center align-items-center py-2"
-                        >
-                          Fullfør Fildeling
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div
+              className="col-lg-12 card d-block border-0 code-container-dark pb-2"
+              id="table"
+            >
+              <Toolbar
+                handleSearchInput={handleSearchInput}
+                handleShareButton={handleShareButton}
+                handleCopyButton={handleCopyButton}
+                handleDownloadButton={handleDownloadButton}
+              />
 
-              <div className="line-numbers overflow-auto code-block">
-                <SyntaxHighlighter
-                  language="xml"
-                  style={vs2015}
-                  showLineNumbers
-                  wrapLines
-                  renderer={virtualizedRenderer()}
-                  lineNumberStyle={{ height: '100px' }}
-                  lineProps={(lineNumber) => {
-                    let style = { display: 'block' }
-                    if (highlightedLineNumbers.includes(lineNumber - 1)) {
-                      style.backgroundColor = 'rgb(110 110 110 / 60%)'
-                    }
-                    return { style }
-                  }}
-                >
-                  {fileContent}
-                </SyntaxHighlighter>
-              </div>
+              <FileContent
+                content={fileContent}
+                highlightedLineNumbers={highlightedLineNumbers}
+              />
+
               <textarea
                 className="hidden-textarea bg-dark"
                 ref={(textarea) => (textAreaRef = textarea)}

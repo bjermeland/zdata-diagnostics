@@ -44,23 +44,15 @@ const widgetItems = [
 const Sidebar = () => {
   const [darkMode, setDarkMode] = useState(false)
   return (
-    <aside
-      className="offcanvas offcanvas-expand bg-dark"
-      id="sidebar"
-    >
+    <aside className="offcanvas offcanvas-expand bg-dark" id="sidebar">
       <div className="offcanvas-header bg-darker d-none d-lg-block py-2">
-        <Link
-          to="/"
-          className="navbar-brand py-1 text-white fs-3"
-        >
+        <Link to="/" className="navbar-brand py-1 text-white fs-3">
           Diagnostics
         </Link>
       </div>
       <div className="offcanvas-header bg-darker d-flex d-lg-none align-items-center">
         <div className="d-flex align-items-center mt-1">
-          <h5 className="text-light mb-0 me-3">
-            Diagnostics
-          </h5>
+          <h5 className="text-light mb-0 me-3">Diagnostics</h5>
         </div>
         <button
           className="btn-close btn-close-white"
@@ -88,7 +80,7 @@ const Sidebar = () => {
             activeClassName="active"
           >
             Files In Error
-            <span className="badge rounded-pill bg-danger float-end">
+            <span className="badge rounded-pill bg-danger float-end px-2">
               8
             </span>
           </NavLink>
@@ -98,7 +90,7 @@ const Sidebar = () => {
             activeClassName="active"
           >
             Agreement File Queues
-            <span className="badge rounded-pill bg-danger float-end">
+            <span className="badge rounded-pill bg-danger float-end px-2">
               6
             </span>
           </NavLink>
@@ -119,7 +111,11 @@ const Sidebar = () => {
                 activeClassName="active"
               >
                 {item.name}
-                <span className="badge rounded-pill bg-danger float-end">
+                <span
+                  className={`badge rounded-pill bg-${
+                    item.name === 'Support Cases' ? 'info' : 'danger'
+                  } float-end px-2`}
+                >
                   {item.fileCount}
                 </span>
               </NavLink>

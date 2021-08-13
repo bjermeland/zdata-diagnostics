@@ -4,7 +4,8 @@ import { toast } from '../../ui/Toast'
 
 const Actions = ({ content, textAreaRef }) => {
   const [publicShareId, setPublicShareId] = useState('')
-  const [isPublicShareIdCopied, copyPublicShareId] = useCopyToClipboard(publicShareId)
+  const [isPublicShareIdCopied, copyPublicShareId] =
+    useCopyToClipboard(publicShareId)
 
   const [isContentCopied, copyContent] = useCopyToClipboard(content)
 
@@ -17,7 +18,7 @@ const Actions = ({ content, textAreaRef }) => {
 
     let publicShareId = ''
     while (!isIdUnique) {
-      publicShareId = Math.random().toString(36).substr(2, 8)
+      publicShareId = Math.random().toString(36).substr(2, 15)
 
       isIdUnique = isShareIdUnique(publicShareId)
     }

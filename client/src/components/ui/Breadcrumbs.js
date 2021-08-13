@@ -35,7 +35,12 @@ const Breadcrumbs = ({ currentPage, items }) => {
           } else {
             return (
               <li key={index} className="breadcrumb-item">
-                {item.href ? <Link to={item.href}>{name}</Link> : name}
+                {/* Don't want people to go to /unmapped-files - empty page */}
+                {item.href && item.name !== 'unmapped files' ? (
+                  <Link to={item.href}>{name}</Link>
+                ) : (
+                  name
+                )}
               </li>
             )
           }
