@@ -48,7 +48,7 @@ const SupportCase = ({ location }) => {
       selector: 'description',
       sortable: true,
       cell: (row) => (
-        <span onClick={() => handleRowClick(row)} className="fs-7">
+        <span onClick={() => handleRowClick(row)} style={{ fontSize: '11px' }}>
           {row.description}
         </span>
       ),

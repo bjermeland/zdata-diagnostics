@@ -84,16 +84,6 @@ const Sidebar = () => {
               8
             </span>
           </NavLink>
-          <NavLink
-            to="/agreement-file-queues"
-            className="nav-link fs-sm mb-4"
-            activeClassName="active"
-          >
-            Agreement File Queues
-            <span className="badge rounded-pill bg-danger float-end px-2">
-              6
-            </span>
-          </NavLink>
         </nav>
         <h6 className="text-light pt-3 pb-2 border-bottom border-light">
           Unmapped Files

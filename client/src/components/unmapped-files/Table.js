@@ -205,7 +205,7 @@ const SubHeader = ({
                   htmlFor="zdata-customers"
                   role="button"
                 >
-                  ZData Customers
+                  Registered Customer
                 </label>
               </div>
             </div>

@@ -12,7 +12,7 @@ import File from './unmapped-files/file/File'
 import FileShare from './file-share/FileShare'
 import SupportCases from './unmapped-files/supportcases/SupportCases'
 import SupportCase from './unmapped-files/supportcases/SupportCase'
-import AgreementFileQueues from './unmapped-files/agreementfilequeues/AgreementFileQueues'
+import FilesInError from './unmapped-files/filesinerror/FilesInError'
 
 const App = () => {
   return (
@@ -46,19 +46,15 @@ const Routes = () => {
           <Sidebar />
           <Route exact path="/" component={Dashboard} />
 
+          <Route exact path={`/files-in-error`} component={FilesInError} />
           <Route
             exact
-            path={`/agreement-file-queues`}
-            component={AgreementFileQueues}
-          />
-          <Route
-            exact
-            path={`/agreement-file-queues/:orgnumber`}
+            path={`/files-in-error/:orgnumber`}
             component={Company}
           />
           <Route
             excat
-            path={`/agreement-file-queues/:orgnumber/:id`}
+            path={`/files-in-error/:orgnumber/:id`}
             component={File}
           />
 

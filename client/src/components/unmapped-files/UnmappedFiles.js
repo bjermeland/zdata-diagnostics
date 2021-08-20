@@ -37,7 +37,14 @@ const UnmappedFiles = ({ location }) => {
       sortable: true,
       cell: (row) => (
         <div onClick={() => handleRowClick(row)}>
-          <span>{row.company}</span>
+          <span>
+            {row.company}{' '}
+            {row.isZDataCustomer && (
+              <span className="badge rounded-pill bg-primary float-end px-2 ms-2">
+                Registered Customer
+              </span>
+            )}
+          </span>
           <br />
           <span
             style={{
@@ -57,7 +64,7 @@ const UnmappedFiles = ({ location }) => {
       selector: 'description',
       sortable: true,
       cell: (row) => (
-        <span onClick={() => handleRowClick(row)} className="fs-7">
+        <span onClick={() => handleRowClick(row)} style={{ fontSize: '11px' }}>
           {row.description}
         </span>
       ),
@@ -88,36 +95,37 @@ const UnmappedFiles = ({ location }) => {
       fileTypes: 'C053, C54C',
       bic: 'SPRNO22',
       lastReceived: '22/04/2021 08:00',
-      isZDataCustomer: true,
+      isZDataCustomer: false,
     },
     {
       id: 2,
       company: 'ZData AS',
       orgNumber: '123123123',
-      description: 'Setter beskrivelse',
-      fileTypes: 'C051',
-      bic: 'NONO20',
-      lastReceived: '22/04/2021 08:00',
-      isZDataCustomer: false,
+      description: '',
+      fileTypes: 'SWIO',
+      bic: 'SPRNO22',
+      lastReceived: '22/04/2021 07:30',
+      isZDataCustomer: true,
     },
     {
       id: 3,
-      company: 'Ny Bedrift AS',
-      orgNumber: '123123123',
-      description: 'Boarding',
+      company: 'Bedrift Charlie 2 AS',
+      orgNumber: '494182040',
+      description:
+        'Disse ingår i konsernet Charlie Holdings. Venter på onboarding.',
       fileTypes: 'C053, C54C',
       bic: 'SPRNO22',
-      lastReceived: '22/04/2021 08:00',
-      isZDataCustomer: false,
+      lastReceived: '22/04/2021 12:01',
+      isZDataCustomer: true,
     },
     {
       id: 4,
-      company: 'Alka AS',
+      company: 'Langtnavn Bygg AS',
       orgNumber: '123123123',
       description: 'Venter på onboarding fra Uni.',
-      fileTypes: 'C053, C54C',
-      bic: 'APAP50',
-      lastReceived: '21/04/2021 08:00',
+      fileTypes: 'C053, C54C, CAMT',
+      bic: 'SHEDNO22',
+      lastReceived: '21/04/2021 12:00',
       isZDataCustomer: false,
     },
     {
@@ -128,46 +136,46 @@ const UnmappedFiles = ({ location }) => {
       fileTypes: 'CS50',
       bic: 'FHFH18',
       lastReceived: '20/04/2021 08:00',
-      isZDataCustomer: true,
+      isZDataCustomer: false,
     },
     {
       id: 6,
-      company: 'Bedrift Alpha AS',
+      company: 'Delta AS',
       orgNumber: '123123123',
-      description: 'Venter på onboarding fra Uni.',
-      fileTypes: 'C053, C54C',
+      description: 'Mottar filer, ingen avtale.',
+      fileTypes: 'C053',
       bic: 'SPRNO22',
-      lastReceived: '28/06/2021 08:00',
-      isZDataCustomer: true,
+      lastReceived: '19/04/2021 08:00',
+      isZDataCustomer: false,
     },
     {
       id: 7,
-      company: 'Bedrift Alpha AS',
+      company: 'Echo Eiendom AS',
       orgNumber: '123123123',
-      description: 'Venter på onboarding fra Uni.',
-      fileTypes: 'C053, C54C',
+      description: 'Ikke lenger kunde.',
+      fileTypes: 'C053, C54C, CAMT',
       bic: 'SPRNO22',
-      lastReceived: '30/04/2021 08:00',
+      lastReceived: '19/04/2021 07:50',
       isZDataCustomer: false,
     },
     {
       id: 8,
-      company: 'Bedrift Alpha AS',
+      company: 'Foxtrot Kjøkken AS',
       orgNumber: '123123123',
-      description: 'Venter på onboarding fra Uni.',
-      fileTypes: 'C053, C54C',
+      description: '',
+      fileTypes: 'C053, C54C, CAMT',
       bic: 'SPRNO22',
-      lastReceived: '30/04/2021 08:00',
+      lastReceived: '18/04/2021 10:00',
       isZDataCustomer: false,
     },
     {
       id: 9,
-      company: 'Bedrift Alpha AS',
+      company: 'Golfbane Oslo AS',
       orgNumber: '123123123',
       description: 'Venter på onboarding fra Uni.',
-      fileTypes: 'C053, C54C',
-      bic: 'SPRNO22',
-      lastReceived: '30/04/2021 08:00',
+      fileTypes: 'SWIO',
+      bic: 'SPSONO22',
+      lastReceived: '18/04/2021 09:30',
       isZDataCustomer: false,
     },
     {
@@ -177,27 +185,27 @@ const UnmappedFiles = ({ location }) => {
       description: 'Venter på onboarding fra Uni.',
       fileTypes: 'C053, C54C',
       bic: 'SPRNO22',
-      lastReceived: '30/04/2021 08:00',
+      lastReceived: '18/04/2021 08:00',
       isZDataCustomer: false,
     },
     {
       id: 11,
-      company: 'Kiwi',
+      company: 'Hotel Isaksen AS',
       orgNumber: '123123123',
-      description: 'Venter på onboarding fra Uni.',
-      fileTypes: 'C053, C54C',
-      bic: 'SPRNO22',
-      lastReceived: '30/04/2021 08:00',
+      description: 'Ingen avtale, ingenting i Freshdesk.',
+      fileTypes: 'C053',
+      bic: 'SHEDNO22',
+      lastReceived: '17/04/2021 08:00',
       isZDataCustomer: false,
     },
     {
       id: 12,
-      company: 'REMA 1000',
+      company: 'Juliett Gelato AS',
       orgNumber: '123123123',
-      description: 'Venter på onboarding fra Uni.',
-      fileTypes: 'C053, C54C',
+      description: 'Ingen avtale.',
+      fileTypes: 'C053',
       bic: 'SPRNO22',
-      lastReceived: '30/04/2021 08:00',
+      lastReceived: '16/04/2021 08:00',
       isZDataCustomer: false,
     },
   ]
