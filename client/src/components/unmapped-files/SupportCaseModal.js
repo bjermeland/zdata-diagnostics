@@ -28,7 +28,7 @@ const SupportCaseModal = () => {
     <>
       <button
         type="button"
-        className="btn btn-translucent-primary btn-icon"
+        className="btn btn-primary btn-icon"
         title="Support Case"
         onClick={() => modal.show()}
       >
@@ -105,7 +105,7 @@ const SupportCaseModal = () => {
                     <label htmlFor="handler" className="form-label">
                       Handler
                     </label>
-                    <select class="form-select" id="handler">
+                    <select className="form-select" id="handler">
                       <option>Choose..</option>
                       <option>Matias</option>
                       <option>Kjetil</option>
@@ -122,9 +122,7 @@ const SupportCaseModal = () => {
                       {partyIds.map((partyId) => {
                         return (
                           <div className="badge bg-dark p-2 mb-2 ms-4">
-                            <span>
-                              {partyId.replace(/(.{3})/g, '$1 ').trim()}
-                            </span>
+                            <span>{partyId.replace(/(.{3})/g, '$1 ').trim()}</span>
                             <button
                               type="button"
                               className="btn btn-link badge text-danger float-end p-0"
@@ -138,10 +136,7 @@ const SupportCaseModal = () => {
                     </div>
                   </div>
                 </div>
-                <button
-                  className="btn btn-primary btn-sm d-block mt-6"
-                  type="submit"
-                >
+                <button className="btn btn-primary btn-sm d-block mt-6" type="submit">
                   Create support case
                 </button>
               </form>
@@ -155,7 +150,7 @@ const SupportCaseModal = () => {
                     <label htmlFor="handler" className="form-label">
                       Case
                     </label>
-                    <select class="form-select" id="handler">
+                    <select className="form-select" id="handler">
                       <option>Choose..</option>
                       <option>UniMicro</option>
                       <option>Sparebank 1 SMN</option>
@@ -164,10 +159,7 @@ const SupportCaseModal = () => {
                     </select>
                   </div>
                 </div>
-                <button
-                  className="btn btn-primary btn-sm d-block mt-6"
-                  type="submit"
-                >
+                <button className="btn btn-primary btn-sm d-block mt-6" type="submit">
                   Add
                 </button>
               </form>

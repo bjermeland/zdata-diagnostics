@@ -4,8 +4,7 @@ import { toast } from '../../ui/Toast'
 
 const Actions = ({ content, textAreaRef }) => {
   const [publicShareId, setPublicShareId] = useState('')
-  const [isPublicShareIdCopied, copyPublicShareId] =
-    useCopyToClipboard(publicShareId)
+  const [isPublicShareIdCopied, copyPublicShareId] = useCopyToClipboard(publicShareId)
 
   const [isContentCopied, copyContent] = useCopyToClipboard(content)
 
@@ -73,7 +72,7 @@ const Actions = ({ content, textAreaRef }) => {
         <button
           title="Table Mode"
           type="button"
-          className="btn btn-primary btn-icon"
+          className="btn btn-dark-gray btn-icon"
           onClick={() => handleTableButton()}
         >
           <i className="ai-grid"></i>
@@ -81,7 +80,7 @@ const Actions = ({ content, textAreaRef }) => {
         <button
           title="Copy to clipboard"
           type="button"
-          className="btn btn-primary btn-icon"
+          className="btn btn-dark-gray btn-icon"
           onClick={() => handleCopyButton()}
         >
           <i className="ai-copy"></i>
@@ -89,19 +88,19 @@ const Actions = ({ content, textAreaRef }) => {
         <button
           title="Download file"
           type="button"
-          className="btn btn-primary btn-icon"
+          className="btn btn-dark-gray btn-icon"
           onClick={() => handleDownloadButton()}
         >
           <i className="ai-download"></i>
         </button>
-        <button
+        {/* <button
           title="Share file"
           type="button"
-          className="btn btn-primary btn-icon"
+          className="btn btn-dark-gray btn-icon"
           onClick={() => handleShareButton()}
         >
           <i className="ai-share-2"></i>
-        </button>
+        </button> */}
       </div>
     </div>
   )

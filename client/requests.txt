@@ -1,13 +1,20 @@
-Diagnostics Feedback and Requests
+BankService Admin
 
 
-Requests:
+PayAdmin
 
-- Laste ned filer i notepad
+- Liste av kunder (knapp med å opprette ny kunde)
 
-- Søke etter messageId i notepad
+- Liste av kontoer
 
-- Bedre søkemuligheter i uncollected (søk etter alle fields)
+- Godkjenn kunde i liste av kunder (highlight ny kunde?)
 
-- https://z-data.slack.com/archives/D025R0EQQ2D/p1624433118006100 (EvryConnector - Send error message directly to customer)
+- Trykk på kunde og vis avtaler evt.?
 
+- Søk etter org.nr
+
+
+Ikke så relevant:
+
+Godkjenn tjenester
+Avstemming

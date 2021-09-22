@@ -49,9 +49,7 @@ const Table = ({
       data.filter((item) => {
         return Object.keys(item)
           .filter((k) => k !== 'id')
-          .some((k) =>
-            item[k].toString().toLowerCase().includes(searchQuery.toLowerCase())
-          )
+          .some((k) => item[k].toString().toLowerCase().includes(searchQuery.toLowerCase()))
       })
     )
   }, [searchQuery, setSearchQuery, data])
@@ -90,6 +88,7 @@ const Table = ({
 
   return !loading ? (
     <DataTable
+      theme="dark"
       columns={columns}
       data={filteredData}
       customStyles={customStyles}
@@ -135,14 +134,14 @@ const SubHeader = ({
 }) => {
   return (
     <div className="row w-100" id="table-subheader">
-      <div className="col-lg-7">
-        <div className="input-group mb-3">
-          <span className="input-group-text" id="search-icon">
+      <div className="col-lg-9">
+        <div className="input-group bg-dark-gray-light mb-3">
+          <span className="input-group-text border-0 bg-dark-gray" id="search-icon">
             <i className="ai-search fs-4"></i>
           </span>
           <input
             type="text"
-            className="form-control"
+            className="form-control border-0"
             placeholder="Type here to search.."
             aria-label="Search"
             aria-describedby="search-icon"
@@ -150,99 +149,45 @@ const SubHeader = ({
           />
         </div>
       </div>
-      <div className="col-lg-5">
+      <div className="col-lg-3">
         {displayZDataCustomersFilter && (
-          <div className="row">
-            <div className="col-lg">
-              <div
-                className="btn-toolbar"
-                role="toolbar"
-                aria-label="Settings toolbar"
-              >
-                <div
-                  className="btn-group me-2 mb-2"
-                  role="group"
-                  aria-label="Settings group"
-                >
-                  <button
-                    type="button"
-                    className="btn btn-translucent-info btn-icon"
-                    title="Refresh"
-                    onClick={() => handleRefresh()}
-                    disabled={disableRefreshButton}
-                  >
-                    <i className="ai-refresh-cw"></i>
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-translucent-primary btn-icon"
-                    title="Retry selected"
-                  >
-                    <i className="ai-download"></i>
-                  </button>
-                  <SupportCaseModal />
-                  <button
-                    type="button"
-                    className="btn btn-translucent-danger btn-icon"
-                    title="Delete selected"
-                  >
-                    <i className="ai-trash-2"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg">
-              <div className="form-check form-check-inline">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  id="zdata-customers"
-                  onClick={(e) => setFilterZDataCustomers(e.target.checked)}
-                  role="button"
-                />
-                <label
-                  className="form-check-label"
-                  htmlFor="zdata-customers"
-                  role="button"
-                >
-                  Registered Customer
-                </label>
-              </div>
-            </div>
-          </div>
-        )}
-        {displayToolbar && (
-          <div
-            className="btn-toolbar"
-            role="toolbar"
-            aria-label="Settings toolbar"
-          >
-            <div
-              className="btn-group me-2 mb-2"
-              role="group"
-              aria-label="Settings group"
-            >
+          <div className="btn-toolbar" role="toolbar" aria-label="Settings toolbar">
+            <div className="btn-group me-2 mb-2 w-100" role="group" aria-label="Settings group">
               <button
                 type="button"
-                className="btn btn-translucent-info btn-icon"
+                className="btn btn-info btn-icon"
                 title="Refresh"
                 onClick={() => handleRefresh()}
                 disabled={disableRefreshButton}
               >
                 <i className="ai-refresh-cw"></i>
               </button>
-              <button
-                type="button"
-                className="btn btn-translucent-primary btn-icon"
-                title="Retry selected"
-              >
+              <button type="button" className="btn btn-primary btn-icon" title="Retry selected">
                 <i className="ai-download"></i>
               </button>
+              <SupportCaseModal />
+              <button type="button" className="btn btn-danger btn-icon" title="Delete selected">
+                <i className="ai-trash-2"></i>
+              </button>
+            </div>
+          </div>
+        )}
+        {displayToolbar && (
+          <div className="btn-toolbar" role="toolbar" aria-label="Settings toolbar">
+            <div className="btn-group me-2 mb-2 w-100" role="group" aria-label="Settings group">
               <button
                 type="button"
-                className="btn btn-translucent-danger btn-icon"
-                title="Delete selected"
+                className="btn btn-info btn-icon"
+                title="Refresh"
+                onClick={() => handleRefresh()}
+                disabled={disableRefreshButton}
               >
+                <i className="ai-refresh-cw"></i>
+              </button>
+              <button type="button" className="btn btn-primary btn-icon" title="Retry selected">
+                <i className="ai-download"></i>
+              </button>
+              <button type="button" className="btn btn-danger btn-icon" title="Delete selected">
                 <i className="ai-trash-2"></i>
               </button>
             </div>
@@ -251,19 +196,11 @@ const SubHeader = ({
         {displaySupportCasesToolbar && (
           <div className="row">
             <div className="col-lg">
-              <div
-                className="btn-toolbar"
-                role="toolbar"
-                aria-label="Settings toolbar"
-              >
-                <div
-                  className="btn-group me-2 mb-2"
-                  role="group"
-                  aria-label="Settings group"
-                >
+              <div className="btn-toolbar" role="toolbar" aria-label="Settings toolbar">
+                <div className="btn-group me-2 mb-2" role="group" aria-label="Settings group">
                   <button
                     type="button"
-                    className="btn btn-translucent-info btn-icon"
+                    className="btn btn-info btn-icon"
                     title="Refresh"
                     onClick={() => handleRefresh()}
                     disabled={disableRefreshButton}
@@ -282,11 +219,7 @@ const SubHeader = ({
                   onClick={(e) => setFilterZDataCustomers(e.target.checked)}
                   role="button"
                 />
-                <label
-                  className="form-check-label"
-                  htmlFor="zdata-customers"
-                  role="button"
-                >
+                <label className="form-check-label" htmlFor="zdata-customers" role="button">
                   My Cases
                 </label>
               </div>

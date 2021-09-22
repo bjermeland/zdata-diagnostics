@@ -6,8 +6,7 @@
 
 .offcanvas {
   will-change: transform, box-shadow;
-  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
-    box-shadow 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s ease;
   box-shadow: none;
   visibility: visible !important;
 
@@ -79,7 +78,7 @@
 }
 
 // Control the breakpoint at which offcanvas expands or collapses
-@include media-breakpoint-up(lg) {
+@include media-breakpoint-up(xl) {
   // Expand offcanvas from lg breakpoint
   .offcanvas-expand {
     transform: none !important;

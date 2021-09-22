@@ -10,7 +10,7 @@ const Toolbar = ({
         <div className="col-lg-8">
           <div className="input-group mb-3">
             <span className="input-group-text">
-              <i className="ai-search fs-xl"></i>
+              <i className="ai-search text-dark-gray-light fs-xl"></i>
             </span>
             <input
               className="form-control"

@@ -3,56 +3,37 @@ import { Link, NavLink } from 'react-router-dom'
 import Switch from 'react-switch'
 import userManager from '../../tools/userManager'
 
-const sidebarItems = [
-  { name: 'DNB', fileCount: 62 },
-  { name: 'DNB Signed', fileCount: 120 },
-  { name: 'Evry', fileCount: 137 },
-  { name: 'Nordea', fileCount: 482 },
-  { name: 'SDC', fileCount: 107 },
-  { name: 'Eika', fileCount: 107 },
-  { name: 'SEB', fileCount: 15 },
-  { name: 'Support Cases', fileCount: 4 },
-]
-
-const widgetItems = [
-  [
-    { name: 'Refresh', icon: 'arrow-repeat' },
-    { name: 'Create Case', icon: 'plus-lg' },
-    {
-      name: 'Add to existing case',
-      icon: 'file-earmark-plus-fill',
-    },
-  ],
-  [
-    { name: 'View Company', icon: 'building' },
-    {
-      name: 'DownloadProcess selected files',
-      icon: 'download',
-    },
-    { name: 'Delete selected files', icon: 'trash' },
-  ],
-  [
-    { name: 'Open in PayAdmin', icon: 'app-indicator' },
-    {
-      name: 'Look up in Freshdesk',
-      icon: 'person-lines-fill',
-    },
-    { name: 'Open in Proff', icon: 'globe' },
-  ],
+const items = [
+  {
+    name: 'Diagnostics',
+    childrens: [
+      { name: 'DNB', fileCount: 62 },
+      { name: 'DNB Signed', fileCount: 120 },
+      { name: 'Evry', fileCount: 137 },
+      { name: 'Nordea', fileCount: 482 },
+      { name: 'SDC', fileCount: 107 },
+      { name: 'Eika', fileCount: 107 },
+      { name: 'SEB', fileCount: 15 },
+      { name: 'Support Cases', fileCount: 4 },
+    ],
+  },
+  {
+    name: 'Pay Admin',
+    childrens: [{ name: 'Search' }, { name: 'Clients' }, { name: 'Accounts' }],
+  },
 ]
 
 const Sidebar = () => {
-  const [darkMode, setDarkMode] = useState(false)
   return (
-    <aside className="offcanvas offcanvas-expand bg-dark" id="sidebar">
-      <div className="offcanvas-header bg-darker d-none d-lg-block py-2">
+    <aside className="offcanvas offcanvas-expand bg-dark border-end border-light" id="sidebar">
+      <div className="offcanvas-header bg-dark d-none d-lg-block py-2">
         <Link to="/" className="navbar-brand py-1 text-white fs-3">
-          Diagnostics
+          BankService Admin
         </Link>
       </div>
-      <div className="offcanvas-header bg-darker d-flex d-lg-none align-items-center">
+      <div className="offcanvas-header bg-dark d-flex d-lg-none align-items-center">
         <div className="d-flex align-items-center mt-1">
-          <h5 className="text-light mb-0 me-3">Diagnostics</h5>
+          <h5 className="text-light mb-0 me-3">BankService Admin</h5>
         </div>
         <button
           className="btn-close btn-close-white"
@@ -61,94 +42,81 @@ const Sidebar = () => {
           aria-label="Close"
         ></button>
       </div>
-      <div className="offcanvas-body pt-4 pb-grid-gutter">
-        <h6 className="text-light pt-3 pb-2 border-bottom border-light">
-          Dashboard
-        </h6>
+      <div className="offcanvas-body pt-4 pb-grid-gutter overflow-y-overlay">
+        <h6 className="text-light pt-3 pb-2 border-bottom border-light">Dashboard</h6>
         <nav className="widget-nav nav nav-light flex-column">
-          <NavLink
-            exact
-            to="/"
-            className="nav-link fs-sm mb-4"
-            activeClassName="active"
-          >
+          <NavLink exact to="/" className="nav-link fs-sm mb-4" activeClassName="active">
             Overview
           </NavLink>
-          <NavLink
-            to="/files-in-error"
-            className="nav-link fs-sm mb-4"
-            activeClassName="active"
-          >
+          <NavLink to="/files-in-error" className="nav-link fs-sm mb-4" activeClassName="active">
             Files In Error
-            <span className="badge rounded-pill bg-danger float-end px-2">
-              8
-            </span>
+            <span className="badge rounded-pill bg-danger float-end px-2">8</span>
           </NavLink>
         </nav>
-        <h6 className="text-light pt-3 pb-2 border-bottom border-light">
-          Unmapped Files
-        </h6>
-        <nav className="widget-nav nav nav-light flex-column">
-          {sidebarItems.map((item, index) => {
-            return (
-              <NavLink
-                key={index}
-                exact
-                to={`/unmapped-files/${item.name
-                  .replace(/\s+/g, '-')
-                  .toLowerCase()}`}
-                className="nav-link fs-sm mb-4"
-                activeClassName="active"
-              >
-                {item.name}
-                <span
-                  className={`badge rounded-pill bg-${
-                    item.name === 'Support Cases' ? 'info' : 'danger'
-                  } float-end px-2`}
+        {items.map((item) => {
+          //* Remove all spaces from name (used in identifiers)
+          const identifier = item.name.replace(/\s+/g, '')
+          return (
+            <div className="accordion accordion-flush" id={`accordion-${identifier}`}>
+              <div className="accordion-item">
+                <h6
+                  className="border-bottom border-light pt-1 mb-3"
+                  id={`flush-heading-${identifier}`}
                 >
-                  {item.fileCount}
-                </span>
-              </NavLink>
-            )
-          })}
-        </nav>
-        <h6 className="text-light pt-3 pb-2 border-bottom border-light">
-          Account
-        </h6>
+                  <button
+                    className="btn btn-link text-light ps-0 accordion-button fs-6 text-decoration-none box-shadow-none"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target={`#flush-collapse-${identifier}`}
+                    aria-expanded="true"
+                    aria-controls={`flush-collapse-${identifier}`}
+                  >
+                    {item.name}
+                  </button>
+                </h6>
+                <div
+                  className="accordion-collapse collapse show"
+                  id={`flush-collapse-${identifier}`}
+                  aria-labelledby={`flush-${identifier}`}
+                  data-bs-parent={`#accordion-${identifier}`}
+                >
+                  <div className="widget-nav nav nav-light flex-column">
+                    {item.childrens.map((children, childrenIdx) => {
+                      return (
+                        <NavLink
+                          key={childrenIdx}
+                          exact
+                          to={`/unmapped-files/${children.name.replace(/\s+/g, '-').toLowerCase()}`}
+                          className="nav-link fs-sm mb-4"
+                          activeClassName="active"
+                        >
+                          {children.name}
+                          {children.fileCount && (
+                            <span
+                              className={`badge rounded-pill bg-${
+                                children.name === 'Support Cases' ? 'info' : 'danger'
+                              } float-end px-2`}
+                            >
+                              {children.fileCount}
+                            </span>
+                          )}
+                        </NavLink>
+                      )
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )
+        })}
+        <h6 className="text-light pt-4 pb-2 border-bottom border-light">Account</h6>
         <nav className="widget-nav nav nav-light d-block">
           <button
-            className="btn btn-link nav-link fs-sm text-decoration-none-hover"
+            className="btn btn-link nav-link fs-sm text-decoration-none"
             onClick={() => userManager.signoutRedirect()}
           >
             Sign out
           </button>
-          <label className="fs-sm nav-link mt-6">
-            <Switch
-              onChange={(status) => setDarkMode(status)}
-              className="react-switch"
-              checked={darkMode}
-              offColor="#e3e3ee"
-              onColor="#766df4"
-              height={22}
-              width={45}
-              handleDiameter={15}
-              uncheckedIcon={false}
-              checkedIcon={false}
-            />
-          </label>
-          {/* <div class="form-check form-switch">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              id="customSwitch2"
-            />
-            <label
-              class="form-check-label"
-              for="customSwitch2"
-            >
-              Toggle this switch element
-            </label>
-          </div> */}
         </nav>
       </div>
     </aside>

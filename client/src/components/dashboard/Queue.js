@@ -9,10 +9,10 @@ const queues = [
   { name: 'SftpExchanger', status: 'danger', fileCount: 3 },
   {
     name: 'Stuck in Processing',
-    status: 'light',
+    status: 'dark',
     fileCount: 2,
   },
-  { name: 'Uncollected', status: 'light', fileCount: 21098 },
+  { name: 'Uncollected', status: 'dark', fileCount: 21098 },
 ]
 
 const Queue = () => {
@@ -25,19 +25,13 @@ const Queue = () => {
           return (
             <div
               key={index}
-              className="alert alert-dark py-4 px-5 mb-2"
+              className="alert alert-dark py-4 px-3 mb-2"
               onClick={() =>
-                history.push(
-                  `/files-in-error/${item.name
-                    .replace(/\s+/g, '-')
-                    .toLowerCase()}`
-                )
+                history.push(`/files-in-error/${item.name.replace(/\s+/g, '-').toLowerCase()}`)
               }
             >
               {item.name}
-              <span
-                className={`badge rounded-pill bg-${item.status} float-end`}
-              >
+              <span className={`badge rounded-pill bg-primary py-1 px-2 float-end`}>
                 {item.fileCount}
               </span>
             </div>

@@ -25,9 +25,7 @@ const UnmappedFiles = ({ location }) => {
   const formatName = (name) => {
     return name
       .split(' ')
-      .map((word) =>
-        word.length === 3 ? `${word.toUpperCase()} ` : `${word} `
-      )
+      .map((word) => (word.length === 3 ? `${word.toUpperCase()} ` : `${word} `))
   }
 
   const columns = [
@@ -37,21 +35,20 @@ const UnmappedFiles = ({ location }) => {
       sortable: true,
       cell: (row) => (
         <div onClick={() => handleRowClick(row)}>
-          <span>
-            {row.company}{' '}
-            {row.isZDataCustomer && (
-              <span className="badge rounded-pill bg-primary float-end px-2 ms-2">
-                Registered Customer
-              </span>
-            )}
-          </span>
-          <br />
+          {row.isZDataCustomer && (
+            <span
+              className="badge rounded-pill bg-primary px-1 me-1"
+              style={{ position: 'relative', bottom: '2px' }}
+            >
+              C
+            </span>
+          )}
+          <span>{row.company}</span>
           <span
+            className="d-block my-1"
             style={{
               fontSize: '13px',
               color: '#aaa',
-              position: 'relative',
-              top: '4px',
             }}
           >
             {row.orgNumber}
@@ -111,8 +108,7 @@ const UnmappedFiles = ({ location }) => {
       id: 3,
       company: 'Bedrift Charlie 2 AS',
       orgNumber: '494182040',
-      description:
-        'Disse ingår i konsernet Charlie Holdings. Venter på onboarding.',
+      description: 'Disse ingår i konsernet Charlie Holdings. Venter på onboarding.',
       fileTypes: 'C053, C54C',
       bic: 'SPRNO22',
       lastReceived: '22/04/2021 12:01',
@@ -214,18 +210,20 @@ const UnmappedFiles = ({ location }) => {
     <section>
       <div className="border-bottom pt-5 pb-2 mt-2 mb-4">
         <Breadcrumbs currentPage={currentPage} items={breadcrumbs} />
-        <h1 className="mt-lg-4 pt-2 fs-2 text-capitalize">
-          {formatName(currentPage)}
-        </h1>
+        <h1 className="pt-4 fs-2 text-capitalize text-eee">{formatName(currentPage)}</h1>
       </div>
       <div className="row">
-        <div className="col-lg-12 card pt-3" id="table">
-          <Table
-            columns={columns}
-            data={data}
-            onRowClicked={(row) => handleRowClick(row)}
-            displayZDataCustomersFilter
-          />
+        <div className="col-xl-12">
+          <div className="card bg-dark-gray-light mb-3">
+            <div className="pt-3 mb-3" id="table">
+              <Table
+                columns={columns}
+                data={data}
+                onRowClicked={(row) => handleRowClick(row)}
+                displayZDataCustomersFilter
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -12,13 +12,13 @@ const comments = [
   {
     id: 0,
     author: 'Matias Tonning',
-    date: '20/04/21 - 14:15',
+    date: new Date(2021, 8, 20),
     text: 'Fant sak #10000 i Freshdesk, bedrift ikke lenger kunde hos Uni',
   },
   {
     id: 1,
     author: 'Matias Tonning',
-    date: '20/04/21 - 14:12',
+    date: new Date(2021, 8, 18),
     text: 'Finner ingen aktiv avtale',
   },
 ]
@@ -29,9 +29,7 @@ const Company = ({ location }) => {
   const history = useHistory()
 
   useEffect(() => {
-    const breadcrumbs = getBreadcrumbsByPath(
-      location.pathname
-    )
+    const breadcrumbs = getBreadcrumbsByPath(location.pathname)
     setCurrentPage(breadcrumbs[breadcrumbs.length - 1].name)
     setBreadcrumbs(breadcrumbs)
   }, [location])
@@ -48,8 +46,7 @@ const Company = ({ location }) => {
     })
   }, [location.pathname])
 
-  const handleRowClick = (row) =>
-    history.push(`${location.pathname}/${row.id}`)
+  const handleRowClick = (row) => history.push(`${location.pathname}/${row.id}`)
 
   const columns = [
     {
@@ -111,26 +108,23 @@ const Company = ({ location }) => {
 
   return currentPage ? (
     <section>
-      <Header
-        currentPage={currentPage}
-        breadcrumbs={breadcrumbs}
-        bank={bank}
-      />
+      <Header currentPage={currentPage} breadcrumbs={breadcrumbs} bank={bank} />
       <div className="row">
-        <div
-          className="col-lg-8 card d-block border-primary pt-3"
-          id="table"
-        >
-          <Table
-            columns={columns}
-            data={data}
-            onRowClicked={(row) => handleRowClick(row)}
-            displayToolbar
-          />
+        <div className="col-xl-8">
+          <div className="card bg-dark-gray-light mb-3">
+            <div className="pt-3 mb-3" id="table">
+              <Table
+                columns={columns}
+                data={data}
+                onRowClicked={(row) => handleRowClick(row)}
+                displayToolbar
+              />
+            </div>
+          </div>
         </div>
-        <div className="col-lg-4 mb-2">
+        <div className="col-xl-4 mb-2">
           <Description />
-          <Comments comments={comments} />
+          <Comments values={comments} />
         </div>
       </div>
     </section>

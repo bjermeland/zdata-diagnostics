@@ -6,15 +6,12 @@ const formatOrganizationNumber = (orgNumber) => {
 }
 
 const formatName = (name) => {
-  return name
-    .split(' ')
-    .map((word) => (word.length === 3 ? `${word.toUpperCase()} ` : `${word} `))
+  return name.split(' ').map((word) => (word.length === 3 ? `${word.toUpperCase()} ` : `${word} `))
 }
 
 const Breadcrumbs = ({ currentPage, items }) => {
-  console.log(items)
   return (
-    <nav className="pt-5" aria-label="breadcrumb">
+    <nav className="pt-5 d-none d-xl-block" aria-label="breadcrumb">
       <ol className="breadcrumb">
         {items.map((item, index) => {
           const name = isNaN(item.name)
@@ -24,11 +21,7 @@ const Breadcrumbs = ({ currentPage, items }) => {
             : formatOrganizationNumber(item.name)
           if (item.name === currentPage) {
             return (
-              <li
-                key={index}
-                className="breadcrumb-item active"
-                aria-current="page"
-              >
+              <li key={index} className="breadcrumb-item active" aria-current="page">
                 {isNaN(name) ? name : name}
               </li>
             )

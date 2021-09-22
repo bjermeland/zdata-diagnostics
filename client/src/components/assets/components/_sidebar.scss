@@ -2,7 +2,6 @@
 // Sidebar
 // --------------------------------------------------
 
-
 // Sidebar toggle button
 
 .sidebar-toggle {
@@ -14,7 +13,6 @@
   border-radius: 0;
   z-index: $zindex-btn-scroll-top;
 }
-
 
 // Adding extra bottom spacing to accomodate sidebar toggle
 
@@ -31,7 +29,6 @@
     }
   }
 }
-
 
 @include media-breakpoint-up(lg) {
   .sidebar-enabled {
@@ -71,9 +68,15 @@
     z-index: 5;
   }
 
-  .sidebar-toggle { display: none; }
+  .sidebar-toggle {
+    display: none;
+  }
   .is-sidebar {
-    .footer { padding-bottom: 0; }
-    .sidebar-toggle { display: none; }
+    .footer {
+      padding-bottom: 0;
+    }
+    .sidebar-toggle {
+      display: none;
+    }
   }
 }

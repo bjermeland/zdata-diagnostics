@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import virtualizedRenderer from 'react-syntax-highlighter-virtualized-renderer'
-import { vs } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import { vs2015 } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import Actions from './Actions'
 import SearchInput from './SearchInput'
 
@@ -26,7 +26,10 @@ const CodeContainer = ({ content }) => {
 
   return (
     <div className="row" id="code-container">
-      <div className="col-lg-12 card d-block border-primary bg-secondary pb-2 code-container-light" id="table">
+      <div
+        className="col-lg-12 card d-block bg-dark-gray-light pb-2 code-container-grey"
+        id="table"
+      >
         <div className="toolbar">
           <div className="row pt-3">
             <div className="col-lg-9">
@@ -41,14 +44,14 @@ const CodeContainer = ({ content }) => {
         <div className="line-numbers overflow-auto code-block">
           <SyntaxHighlighter
             language="xml"
-            style={vs}
+            style={vs2015}
             showLineNumbers
             wrapLines
             renderer={virtualizedRenderer()}
             lineProps={(lineNumber) => {
               let style = { display: 'block' }
               if (highlightedLineNumbers.includes(lineNumber - 1)) {
-                style.backgroundColor = '#ffe7a4'
+                style.backgroundColor = '#4e4c6a'
               }
               return { style }
             }}

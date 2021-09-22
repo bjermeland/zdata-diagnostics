@@ -21,20 +21,12 @@ const App = () => {
         <Routes />
         <Route exact path="/oidc-callback" component={AuthCallback} />
       </CheckAuth>
-      <Route exact path="/share/:id" component={FileShare} />
+      {/* <Route exact path="/share/:id" component={FileShare} /> */}
     </Router>
   )
 }
 
-const UnmappedFilesRoutes = [
-  'dnb',
-  'dnb-signed',
-  'evry',
-  'nordea',
-  'sdc',
-  'eika',
-  'seb',
-]
+const UnmappedFilesRoutes = ['dnb', 'dnb-signed', 'evry', 'nordea', 'sdc', 'eika', 'seb']
 
 const Routes = () => {
   const auth = useSelector((state) => state.auth)
@@ -47,48 +39,20 @@ const Routes = () => {
           <Route exact path="/" component={Dashboard} />
 
           <Route exact path={`/files-in-error`} component={FilesInError} />
-          <Route
-            exact
-            path={`/files-in-error/:orgnumber`}
-            component={Company}
-          />
-          <Route
-            excat
-            path={`/files-in-error/:orgnumber/:id`}
-            component={File}
-          />
+          <Route exact path={`/files-in-error/:orgnumber`} component={Company} />
+          <Route excat path={`/files-in-error/:orgnumber/:id`} component={File} />
 
           {UnmappedFilesRoutes.map((route) => {
             return (
               <div key={route}>
-                <Route
-                  exact
-                  path={`/unmapped-files/${route}`}
-                  component={UnmappedFiles}
-                />
-                <Route
-                  exact
-                  path={`/unmapped-files/${route}/:orgnumber`}
-                  component={Company}
-                />
-                <Route
-                  excat
-                  path={`/unmapped-files/${route}/:orgnumber/:id`}
-                  component={File}
-                />
+                <Route exact path={`/unmapped-files/${route}`} component={UnmappedFiles} />
+                <Route exact path={`/unmapped-files/${route}/:orgnumber`} component={Company} />
+                <Route excat path={`/unmapped-files/${route}/:orgnumber/:id`} component={File} />
               </div>
             )
           })}
-          <Route
-            exact
-            path="/unmapped-files/support-cases"
-            component={SupportCases}
-          />
-          <Route
-            exact
-            path="/unmapped-files/support-cases/:id"
-            component={SupportCase}
-          />
+          <Route exact path="/unmapped-files/support-cases" component={SupportCases} />
+          <Route exact path="/unmapped-files/support-cases/:id" component={SupportCase} />
         </div>
       </section>
     </main>

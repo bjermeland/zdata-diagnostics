@@ -9,12 +9,12 @@
 }
 
 .alert-warning {
-    background-color: $warning-bg;
+  background-color: $warning-bg;
 }
 
 .alert-danger {
-    color: $danger-alert;
-    background-color: $danger-bg;
+  color: $danger-alert;
+  background-color: $danger-bg;
 }
 
 .alert-secondary {
@@ -34,6 +34,16 @@
 .alert-dark {
   border-color: $dark;
   background-color: $dark;
+  color: $white;
+
+  .alert-link {
+    color: $white;
+  }
+}
+
+.alert-dark-gray {
+  border-color: $dark-gray-light;
+  background-color: $dark-gray-light;
   color: $white;
 
   .alert-link {

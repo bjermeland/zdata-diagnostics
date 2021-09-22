@@ -52,21 +52,25 @@ const Services = () => {
       <div className="my-5">
         {services.map((item, index) => {
           return (
-            <div
-              key={index}
-              className={`alert alert-${item.status} py-4 px-5 mb-2`}
-            >
-              {item.name}
-              <div className="float-end">
-                <small>
-                  <span className="fw-500">
-                    {dayjs(item.lastUpdate).fromNow()}
+            <div key={index} className={`alert alert-${item.status} py-4 px-3 mb-2`}>
+              <div className="row">
+                <div className="col">
+                  <span className="fw-500">{item.name}</span>
+                </div>
+                <div className="col d-flex align-items-center justify-content-end">
+                  <span
+                    id="change-values-hover"
+                    className={`badge rounded-pill bg-${item.status} float-end px-2`}
+                  >
+                    <span>{dayjs(item.lastUpdate).fromNow()}</span>
+                    <span>{dayjs(item.lastUpdate).format('DD.MM.YYYY HH:mm')}</span>
                   </span>
-                  {' - '}
-                  {dayjs(item.lastUpdate).format(
-                    'DD.MM.YYYY HH:mm'
-                  )}
-                </small>
+                  {/* <small>
+                    <span className="fw-500">{dayjs(item.lastUpdate).fromNow()}</span>
+                    {' - '}
+                    {dayjs(item.lastUpdate).format('DD.MM.YYYY HH:mm')}
+                  </small> */}
+                </div>
               </div>
             </div>
           )

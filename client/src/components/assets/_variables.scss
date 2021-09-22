@@ -21,6 +21,8 @@ $gray-700: #5a5b75 !default;
 $gray-800: #4a4b65 !default;
 $gray-900: #37384e !default;
 $black: #000 !default;
+$dark-gray: #333 !default;
+$dark-gray-light: #424242 !default;
 
 // Brand colors
 $primary: #766df4 !default;
@@ -34,7 +36,7 @@ $warning: #664d03 !default;
 $danger: #e51f51 !default;
 $danger-alert: #842029 !default;
 $light: $white !default;
-$dark: $gray-900 !default;
+$dark: #222 !default;
 
 // Colors background
 $success-bg: #d1e7dd !default;
@@ -51,6 +53,8 @@ $theme-colors: (
   'danger': $danger,
   'light': $light,
   'dark': $dark,
+  'dark-gray': $dark-gray,
+  'dark-gray-light': $dark-gray-light,
 ) !default;
 
 // Faded colors map
@@ -130,13 +134,13 @@ $container-max-widths: (
 
 // Body
 
-$body-color: $gray-600 !default;
-$body-bg: $white !default;
-$text-muted: $gray-500 !default;
+$body-color: $gray-200 !default;
+$body-bg: $dark-gray !default;
+$text-muted: $gray-300 !default;
 
 // Links
 
-$link-color: $primary !default;
+$link-color: $gray-300 !default;
 $link-decoration: none !default;
 $link-hover-color: darken($link-color, 10%) !default;
 $link-hover-decoration: underline !default;
@@ -192,7 +196,7 @@ $icons-font-path: '../fonts' !default;
 @import 'components/icons';
 
 $font-family-sans-serif: 'Inter', sans-serif !default;
-$headings-color: $gray-800 !default;
+$headings-color: $gray-200 !default;
 
 $font-size-base: 1rem !default;
 $font-size-xl: ($font-size-base * 1.25) !default;
@@ -398,8 +402,8 @@ $btn-scroll-top-bg: rgba($gray-900, 0.25) !default;
 $btn-scroll-top-hover-bg: rgba($gray-900, 0.5) !default;
 $btn-scroll-top-color: $white !default;
 $btn-scroll-top-hover-color: $white !default;
-$btn-scroll-top-transition: right 400ms cubic-bezier(0.68, -0.55, 0.265, 1.55),
-  opacity 0.3s, background-color 0.25s ease-in-out !default;
+$btn-scroll-top-transition: right 400ms cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s,
+  background-color 0.25s ease-in-out !default;
 
 // Close
 $btn-close-width: 0.625em !default;
@@ -518,9 +522,8 @@ $nav-link-hover-color: $primary !default;
 $nav-link-active-color: $primary !default;
 $nav-link-disabled-color: $gray-500 !default;
 $nav-link-icon-size: $font-size-base !default;
-$nav-link-transition: color 0.25s ease-in-out,
-  background-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out,
-  border-color 0.25s ease-in-out !default;
+$nav-link-transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
+  box-shadow 0.25s ease-in-out, border-color 0.25s ease-in-out !default;
 
 // Light navs
 $nav-link-light-color: rgba($white, 0.7) !default;
@@ -562,8 +565,8 @@ $media-tab-opacity: 0.72 !default;
 $media-tab-active-opacity: 1 !default;
 $media-tab-active-bg: $white !default;
 $media-tab-active-box-shadow: $box-shadow-active !default;
-$media-tab-transition: background-color 0.25s ease-in-out,
-  border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out !default;
+$media-tab-transition: background-color 0.25s ease-in-out, border-color 0.25s ease-in-out,
+  box-shadow 0.25s ease-in-out !default;
 
 $media-tab-light-color: $white !default;
 $media-tab-light-border-color: $border-light-color !default;
@@ -678,10 +681,10 @@ $accordion-border-radius: $border-radius-lg !default;
 $accordion-icon-transition: none !default;
 $accordion-icon-width: 0.75rem !default;
 
-$accordion-color: $gray-800 !default;
+$accordion-color: $white !default;
 $accordion-button-active-color: $primary !default;
 $accordion-icon-color: $accordion-color !default;
-$accordion-icon-active-color: $accordion-button-active-color !default;
+$accordion-icon-active-color: $gray-200 !default;
 
 $accordion-button-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 426.667 426.667'><path fill-rule='evenodd' fill='#{$accordion-icon-color}' d='M405.332 192H234.668V21.332C234.668 9.559 225.109 0 213.332 0S192 9.559 192 21.332V192H21.332C9.559 192 0 201.559 0 213.332s9.559 21.336 21.332 21.336H192v170.664c0 11.777 9.559 21.336 21.332 21.336s21.336-9.559 21.336-21.336V234.668h170.664c11.777 0 21.336-9.559 21.336-21.336S417.109 192 405.332 192zm0 0'/></svg>") !default;
 
@@ -732,10 +735,10 @@ $breadcrumb-divider-color: $gray-500 !default;
 $breadcrumb-item-font-size: $font-size-base * 0.8125 !default;
 $breadcrumb-divider: $ai-chevron-right !default;
 $breadcrumb-divider-font-size: 1.2em !default;
-$breadcrumb-active-color: $gray-500 !default;
+$breadcrumb-active-color: $gray-300 !default;
 
-$breadcrumb-dark-item-link-color: $gray-700 !default;
-$breadcrumb-dark-item-link-hover-color: $primary !default;
+$breadcrumb-dark-item-link-color: $gray-500 !default;
+$breadcrumb-dark-item-link-hover-color: $gray-600 !default;
 
 $breadcrumb-light-item-link-color: $white !default;
 $breadcrumb-light-item-link-hover-color: $white !default;
@@ -770,10 +773,7 @@ $card-floating-icon-spacing: $spacer !default;
 $card-floating-icon-font-size: 1.1875rem !default;
 $card-floating-icon-bg: $white !default;
 $card-floating-icon-color: $primary !default;
-$card-floating-icon-hover-color: darken(
-  $card-floating-icon-color,
-  10%
-) !default;
+$card-floating-icon-hover-color: darken($card-floating-icon-color, 10%) !default;
 $card-floating-icon-box-shadow: $box-shadow !default;
 $card-floating-icon-transition: all 0.25s ease-in-out !default;
 
@@ -947,10 +947,7 @@ $carousel-control-border-radius: $border-radius !default;
 $carousel-control-font-size: $font-size-xl !default;
 $carousel-control-color: $gray-600 !default;
 $carousel-control-bg: $white !default;
-$carousel-control-hover-border-color: darken(
-  $carousel-control-border-color,
-  10%
-) !default;
+$carousel-control-hover-border-color: darken($carousel-control-border-color, 10%) !default;
 $carousel-control-hover-color: $gray-800 !default;
 $carousel-control-transition: all 0.3s ease-in-out !default;
 
@@ -1025,8 +1022,7 @@ $hotspot-inner-color: $primary !default;
 $hotspot-inner-font-size: $font-size-base !default;
 $hotspot-hover-inner-bg: $primary !default;
 $hotspot-hover-inner-color: $white !default;
-$hotspot-inner-transition: background-color 0.3s ease-in-out,
-  color 0.3s ease-in-out !default;
+$hotspot-inner-transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out !default;
 
 // Pricing
 
@@ -1091,14 +1087,13 @@ $active-filter-bg: $gray-100 !default;
 $active-filter-color: $gray-600 !default;
 $active-filter-hover-bg: darken($active-filter-bg, 3%) !default;
 $active-filter-hover-color: $gray-800 !default;
-$active-filter-transition: background-color 0.25s ease-in-out,
-  color 0.25s ease-in-out !default;
+$active-filter-transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out !default;
 
 // Social buttons
 
 $btn-social-border-width: $border-width !default;
-$btn-social-transition: border-color 0.25s ease-in-out,
-  background-color 0.25s ease-in-out, color 0.25s ease-in-out !default;
+$btn-social-transition: border-color 0.25s ease-in-out, background-color 0.25s ease-in-out,
+  color 0.25s ease-in-out !default;
 
 $btn-social-size: 2.25rem !default;
 $btn-social-size-sm: 1.75rem !default;
