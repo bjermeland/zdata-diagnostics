@@ -1,9 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, ReactChild, ReactChildren } from 'react'
 import { withRouter } from 'react-router-dom'
 import userManager from './userManager'
 import Spinner from '../components/ui/Spinner'
 
-const CheckAuth = ({ location, children }) => {
+interface RootProps {
+  children: ReactChild | ReactChildren
+}
+
+const CheckAuth = ({ location, children }: { location?; children? }) => {
   const [isValidUser, setIsValidUser] = useState(false)
 
   useEffect(() => {

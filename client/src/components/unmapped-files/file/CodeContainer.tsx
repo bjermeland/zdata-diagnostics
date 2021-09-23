@@ -5,12 +5,12 @@ import { vs2015 } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import Actions from './Actions'
 import SearchInput from './SearchInput'
 
-const CodeContainer = ({ content }) => {
-  const [highlightedLineNumbers, setHighlightedLineNumbers] = useState([])
+const CodeContainer = ({ content }: { content: string }) => {
+  const [highlightedLineNumbers, setHighlightedLineNumbers] = useState<number[]>([])
 
   //* Handler for search input
   const handleSearchInput = (value) => {
-    const lineNumbers = []
+    const lineNumbers: number[] = []
 
     if (value !== '') {
       const lines = content.split(/\r\n|\r|\n/)
@@ -49,7 +49,7 @@ const CodeContainer = ({ content }) => {
             wrapLines
             renderer={virtualizedRenderer()}
             lineProps={(lineNumber) => {
-              let style = { display: 'block' }
+              let style = { display: 'block', backgroundColor: 'initial' }
               if (highlightedLineNumbers.includes(lineNumber - 1)) {
                 style.backgroundColor = '#4e4c6a'
               }

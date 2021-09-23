@@ -1,12 +1,16 @@
+import { ReactChildren, ReactChild } from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { OidcProvider, loadUser } from 'redux-oidc'
 import userManager from '../tools/userManager'
 import store from '../store'
-
 import FileShare from './file-share/FileShare'
 
-const Root = ({ children }) => {
+interface RootProps {
+  children: ReactChild | ReactChildren
+}
+
+const Root = ({ children }: RootProps) => {
   loadUser(store, userManager)
 
   const path = window.location.pathname

@@ -2,16 +2,18 @@ import { useEffect, useRef, useState } from 'react'
 import { Modal } from 'bootstrap'
 
 const SupportCaseModal = () => {
-  const [modal, setModal] = useState(null)
-  const modalRef = useRef()
+  const [modal, setModal] = useState<Modal | null>(null)
+  const modalRef = useRef(null)
 
   useEffect(() => {
-    setModal(
-      new Modal(modalRef.current, {
-        backdrop: 'static',
-        keyboard: false,
-      })
-    )
+    if (modalRef && modalRef.current) {
+      setModal(
+        new Modal(modalRef.current, {
+          backdrop: 'static',
+          keyboard: false,
+        })
+      )
+    }
   }, [])
 
   const partyIds = [
@@ -30,7 +32,7 @@ const SupportCaseModal = () => {
         type="button"
         className="btn btn-primary btn-icon"
         title="Support Case"
-        onClick={() => modal.show()}
+        // onClick={() => modal?.show()}
       >
         <i className="ai-folder-plus"></i>
       </button>
@@ -38,7 +40,7 @@ const SupportCaseModal = () => {
         id="support-case-modal"
         className="modal fade"
         ref={modalRef}
-        tabIndex="-1"
+        tabIndex={-1}
         role="dialog"
       >
         <div className="modal-dialog" role="document">
@@ -46,7 +48,7 @@ const SupportCaseModal = () => {
             <div className="modal-header">
               <ul className="nav nav-tabs mb-0" role="tablist">
                 <li className="nav-item">
-                  <button
+                  <a
                     className="nav-link active"
                     href="#create-case"
                     data-bs-toggle="tab"
@@ -55,10 +57,10 @@ const SupportCaseModal = () => {
                   >
                     <i className="ai-plus me-2 mt-n1"></i>
                     Create case
-                  </button>
+                  </a>
                 </li>
                 <li className="nav-item">
-                  <button
+                  <a
                     className="nav-link"
                     href="#add-existing"
                     data-bs-toggle="tab"
@@ -67,7 +69,7 @@ const SupportCaseModal = () => {
                   >
                     <i className="ai-file-plus me-2 mt-n1"></i>
                     Add to existing case
-                  </button>
+                  </a>
                 </li>
               </ul>
               <button

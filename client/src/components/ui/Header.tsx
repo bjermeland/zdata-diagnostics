@@ -2,9 +2,10 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Gravatar from 'react-gravatar'
 import userManager from '../../tools/userManager'
+import { RootState } from '../../store'
 
 const Header = () => {
-  const auth = useSelector((state) => state.auth)
+  const auth = useSelector((state: RootState) => state.auth)
   return (
     <header
       className="navbar navbar-expand navbar-dark fixed-top navbar-shadow bg-dark-gray px-3 px-lg-4"
@@ -23,10 +24,13 @@ const Header = () => {
         BankService
       </Link>
       <div className="navbar-tool dropdown ms-auto">
-        <Gravatar className="navbar-tool-icon-box-img" email={auth.user.profile.name} />
+        <Gravatar
+          className="navbar-tool-icon-box-img"
+          email={auth?.user?.profile.name ?? 'support@zdata.no'}
+        />
         <span className="navbar-tool-label dropdown-toggle">
           <small>Hello,</small>
-          {auth.user.profile.full_name.split(' ')[0]}
+          {auth?.user?.profile.full_name.split(' ')[0] ?? 'User'}
         </span>
         <ul className="dropdown-menu dropdown-menu-end" style={{ width: '1rem', top: '30px' }}>
           <li>

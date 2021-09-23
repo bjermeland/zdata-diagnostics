@@ -8,24 +8,48 @@ import Comments from './Comments'
 import Spinner from '../../ui/Spinner'
 import Table from '../Table'
 
-const comments = [
+interface BreadcrumbLink {
+  name: string
+  href: string
+}
+
+interface Bank {
+  name: string
+  bic: string
+}
+
+interface File {
+  id: string
+  name: string
+  state: string
+  created: string //! change to Date when conneced to API
+}
+
+interface Comment {
+  id: string
+  author: string
+  date: Date
+  text: string
+}
+
+const comments: Comment[] = [
   {
-    id: 0,
+    id: '0',
     author: 'Matias Tonning',
     date: new Date(2021, 8, 20),
     text: 'Fant sak #10000 i Freshdesk, bedrift ikke lenger kunde hos Uni',
   },
   {
-    id: 1,
+    id: '1',
     author: 'Matias Tonning',
     date: new Date(2021, 8, 18),
     text: 'Finner ingen aktiv avtale',
   },
 ]
 
-const Company = ({ location }) => {
-  const [currentPage, setCurrentPage] = useState(null)
-  const [breadcrumbs, setBreadcrumbs] = useState([])
+const Company = ({ location }: { location: Location }) => {
+  const [currentPage, setCurrentPage] = useState<string | null>(null)
+  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbLink[]>([])
   const history = useHistory()
 
   useEffect(() => {
@@ -36,7 +60,7 @@ const Company = ({ location }) => {
 
   //* ---
 
-  const [bank, setBank] = useState(null)
+  const [bank, setBank] = useState<Bank | null>(null)
 
   useEffect(() => {
     const bic = 'SPTRNO22'
@@ -46,7 +70,7 @@ const Company = ({ location }) => {
     })
   }, [location.pathname])
 
-  const handleRowClick = (row) => history.push(`${location.pathname}/${row.id}`)
+  const handleRowClick = (row: File) => history.push(`${location.pathname}/${row.id}`)
 
   const columns = [
     {
@@ -67,7 +91,7 @@ const Company = ({ location }) => {
     },
   ]
 
-  const data = [
+  const data: File[] = [
     {
       id: 'e67af04e-5270-45c1-be0a-4511f041f78e',
       name: 'P.00921643497.000.C053.20210706064739-E2C6G.DAT',
@@ -106,13 +130,13 @@ const Company = ({ location }) => {
     },
   ]
 
-  return currentPage ? (
+  return currentPage && bank ? (
     <section>
       <Header currentPage={currentPage} breadcrumbs={breadcrumbs} bank={bank} />
       <div className="row">
         <div className="col-xl-8">
           <div className="card bg-dark-gray-light mb-3">
-            <div className="pt-3 mb-3" id="table">
+            <div className="pt-3 mb-3 pe-2" id="table">
               <Table
                 columns={columns}
                 data={data}

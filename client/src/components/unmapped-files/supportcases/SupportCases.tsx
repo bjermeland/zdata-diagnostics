@@ -5,9 +5,14 @@ import SupportCaseHeader from './Header'
 import Spinner from '../../ui/Spinner'
 import Table from '../Table'
 
-const SupportCases = ({ location }) => {
-  const [currentPage, setCurrentPage] = useState(null)
-  const [breadcrumbs, setBreadcrumbs] = useState([])
+interface BreadcrumbLink {
+  name: string
+  href: string
+}
+
+const SupportCases = ({ location }: { location: Location }) => {
+  const [currentPage, setCurrentPage] = useState<string | null>(null)
+  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbLink[]>([])
   const history = useHistory()
 
   useEffect(() => {
@@ -46,10 +51,7 @@ const SupportCases = ({ location }) => {
           <span
             style={{
               fontSize: '12px',
-              color:
-                getStatusByCode(row.status) === 'Mottatt svar'
-                  ? '#0f8a01'
-                  : '#aaa',
+              color: getStatusByCode(row.status) === 'Mottatt svar' ? '#0f8a01' : '#aaa',
               position: 'relative',
               top: '4px',
             }}
@@ -148,13 +150,17 @@ const SupportCases = ({ location }) => {
     <section>
       <SupportCaseHeader currentPage={currentPage} breadcrumbs={breadcrumbs} />
       <div className="row">
-        <div className="col-lg-12 card d-block border-primary pt-3" id="table">
-          <Table
-            columns={columns}
-            data={data}
-            onRowClicked={(row) => handleRowClick(row)}
-            displaySupportCasesToolbar
-          />
+        <div className="col-xl-12">
+          <div className="card bg-dark-gray-light mb-3">
+            <div className="pt-3 mb-3 pe-2" id="table">
+              <Table
+                columns={columns}
+                data={data}
+                onRowClicked={(row) => handleRowClick(row)}
+                displaySupportCasesToolbar
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

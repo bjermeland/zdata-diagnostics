@@ -1,12 +1,36 @@
 import Breadcrumbs from '../../ui/Breadcrumbs'
 
-const CompanyHeader = ({ currentPage, breadcrumbs, bank }) => {
+interface BreadcrumbLink {
+  name: string
+  href: string
+}
+
+interface Bank {
+  name: string
+  bic: string
+}
+
+const CompanyHeader = ({
+  currentPage,
+  breadcrumbs,
+  bank,
+}: {
+  currentPage: string
+  breadcrumbs: BreadcrumbLink[]
+  bank?: Bank
+}) => {
   return (
     <div className="border-bottom pt-5 pb-1 mt-2 mb-4 row">
       <Breadcrumbs currentPage={currentPage} items={breadcrumbs} />
       <div className="col-xl-8">
         <h1 className="pt-4 fs-2 text-eee">Bedrift Alpha AS</h1>
-        <p className="text-ddd">{bank.name ? `${bank.name} (${bank.bic})` : bank.bic}</p>
+        <p className="text-ddd">
+          {bank
+            ? bank.name !== ''
+              ? `${bank.name} (${bank.bic})`
+              : bank.bic
+            : 'No BIC configured.'}
+        </p>
       </div>
       <div className="col-xl-4">
         <div className="card bg-dark-gray-light mb-3">

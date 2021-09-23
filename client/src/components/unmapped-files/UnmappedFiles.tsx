@@ -5,9 +5,14 @@ import Breadcrumbs from '../ui/Breadcrumbs'
 import Spinner from '../ui/Spinner'
 import Table from './Table'
 
-const UnmappedFiles = ({ location }) => {
-  const [currentPage, setCurrentPage] = useState(null)
-  const [breadcrumbs, setBreadcrumbs] = useState([])
+interface BreadcrumbLink {
+  name: string
+  href: string
+}
+
+const UnmappedFiles = ({ location }: { location: Location }) => {
+  const [currentPage, setCurrentPage] = useState<string | null>(null)
+  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbLink[]>([])
   const history = useHistory()
 
   useEffect(() => {
@@ -215,7 +220,7 @@ const UnmappedFiles = ({ location }) => {
       <div className="row">
         <div className="col-xl-12">
           <div className="card bg-dark-gray-light mb-3">
-            <div className="pt-3 mb-3" id="table">
+            <div className="pt-3 mb-3 pe-2" id="table">
               <Table
                 columns={columns}
                 data={data}

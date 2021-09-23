@@ -6,6 +6,11 @@ import { ToastSection } from '../../ui/Toast'
 import Spinner from '../../ui/Spinner'
 import { getBreadcrumbsByPath } from '../../../utils/pagetitles'
 
+interface BreadcrumbLink {
+  name: string
+  href: string
+}
+
 const xml = `<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:camt.053.001.02">
 <BkToCstmrStmt>
     <GrpHdr>
@@ -326,9 +331,9 @@ const xml = `<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml
 </BkToCstmrStmt>
 </Document>`
 
-const File = ({ location }) => {
-  const [currentPage, setCurrentPage] = useState(null)
-  const [breadcrumbs, setBreadcrumbs] = useState([])
+const File = ({ location }: { location: Location }) => {
+  const [currentPage, setCurrentPage] = useState<string | null>(null)
+  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbLink[]>([])
 
   useEffect(() => {
     const breadcrumbs = getBreadcrumbsByPath(location.pathname)
@@ -336,7 +341,7 @@ const File = ({ location }) => {
     setBreadcrumbs(breadcrumbs)
   }, [location])
 
-  const [fileContent, setFileContent] = useState(null)
+  const [fileContent, setFileContent] = useState<any | null>(null)
 
   useEffect(() => {
     const content = format(xml, {
@@ -345,7 +350,7 @@ const File = ({ location }) => {
     setFileContent(content)
   }, [location.pathname])
 
-  return fileContent ? (
+  return currentPage && fileContent ? (
     <section>
       <Header breadcrumbs={breadcrumbs} currentPage={currentPage} />
 

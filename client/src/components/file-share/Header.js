@@ -16,12 +16,8 @@ const Header = () => {
           <div className="card-body">
             <div className="row">
               <div className="col-lg-7 mb-3">
-                <h5 className="card-title fs-sm text-ccc text-truncate">
-                  Name
-                </h5>
-                <p className="card-text fs-sm">
-                  P.00921643497.000.C053.20210706064739-E2C6G.DAT
-                </p>
+                <h5 className="card-title fs-sm text-ccc text-truncate">Name</h5>
+                <p className="card-text fs-sm">P.00921643497.000.C053.20210706064739-E2C6G.DAT</p>
               </div>
               <div className="col-lg-2 mb-3">
                 <h5 className="card-title fs-sm text-ccc">Format</h5>

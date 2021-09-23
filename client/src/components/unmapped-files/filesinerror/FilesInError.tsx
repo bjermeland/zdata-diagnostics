@@ -1,25 +1,37 @@
 import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router'
 import { getBreadcrumbsByPath } from '../../../utils/pagetitles'
-import SupportCaseHeader from './Header'
+import Breadcrumbs from '../../ui/Breadcrumbs'
 import Spinner from '../../ui/Spinner'
 import Table from '../Table'
 
-const SupportCase = ({ location }) => {
-  const [currentPage, setCurrentPage] = useState(null)
-  const [breadcrumbs, setBreadcrumbs] = useState([])
+interface BreadcrumbLink {
+  name: string
+  href: string
+}
+
+const FilesInError = ({ location }: { location: Location }) => {
+  const [currentPage, setCurrentPage] = useState<string | null>(null)
+  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbLink[]>([])
   const history = useHistory()
 
   useEffect(() => {
     const breadcrumbs = getBreadcrumbsByPath(location.pathname)
     setCurrentPage(breadcrumbs[breadcrumbs.length - 1].name)
     setBreadcrumbs(breadcrumbs)
-  }, [location])
+  }, [location, history])
 
-  //* ---
+  const handleRowClick = (row) => {
+    history.push(`${location.pathname}/${row.orgNumber}`)
+  }
 
-  const handleRowClick = (row) =>
-    history.push(`/unmapped-files/evry/${row.orgNumber}`)
+  //* If name exists of 3 letters, change all to uppercase
+  //* For example. SEB, SDC
+  const formatName = (name) => {
+    return name
+      .split(' ')
+      .map((word) => (word.length === 3 ? `${word.toUpperCase()} ` : `${word} `))
+  }
 
   const columns = [
     {
@@ -28,14 +40,20 @@ const SupportCase = ({ location }) => {
       sortable: true,
       cell: (row) => (
         <div onClick={() => handleRowClick(row)}>
+          {row.isZDataCustomer && (
+            <span
+              className="badge rounded-pill bg-primary px-1 me-1"
+              style={{ position: 'relative', bottom: '2px' }}
+            >
+              C
+            </span>
+          )}
           <span>{row.company}</span>
-          <br />
           <span
+            className="d-block my-1"
             style={{
               fontSize: '13px',
               color: '#aaa',
-              position: 'relative',
-              top: '4px',
             }}
           >
             {row.orgNumber}
@@ -79,36 +97,36 @@ const SupportCase = ({ location }) => {
       fileTypes: 'C053, C54C',
       bic: 'SPRNO22',
       lastReceived: '22/04/2021 08:00',
-      isZDataCustomer: true,
+      isZDataCustomer: false,
     },
     {
       id: 2,
       company: 'ZData AS',
       orgNumber: '123123123',
-      description: 'Setter beskrivelse',
-      fileTypes: 'C051',
-      bic: 'NONO20',
-      lastReceived: '22/04/2021 08:00',
-      isZDataCustomer: false,
+      description: '',
+      fileTypes: 'SWIO',
+      bic: 'SPRNO22',
+      lastReceived: '22/04/2021 07:30',
+      isZDataCustomer: true,
     },
     {
       id: 3,
-      company: 'Ny Bedrift AS',
-      orgNumber: '123123123',
-      description: 'Boarding',
+      company: 'Bedrift Charlie 2 AS',
+      orgNumber: '494182040',
+      description: 'Disse ingår i konsernet Charlie Holdings. Venter på onboarding.',
       fileTypes: 'C053, C54C',
       bic: 'SPRNO22',
-      lastReceived: '22/04/2021 08:00',
-      isZDataCustomer: false,
+      lastReceived: '22/04/2021 12:01',
+      isZDataCustomer: true,
     },
     {
       id: 4,
-      company: 'Alka AS',
+      company: 'Langtnavn Bygg AS',
       orgNumber: '123123123',
       description: 'Venter på onboarding fra Uni.',
-      fileTypes: 'C053, C54C',
-      bic: 'APAP50',
-      lastReceived: '21/04/2021 08:00',
+      fileTypes: 'C053, C54C, CAMT',
+      bic: 'SHEDNO22',
+      lastReceived: '21/04/2021 12:00',
       isZDataCustomer: false,
     },
     {
@@ -119,46 +137,46 @@ const SupportCase = ({ location }) => {
       fileTypes: 'CS50',
       bic: 'FHFH18',
       lastReceived: '20/04/2021 08:00',
-      isZDataCustomer: true,
+      isZDataCustomer: false,
     },
     {
       id: 6,
-      company: 'Bedrift Alpha AS',
+      company: 'Delta AS',
       orgNumber: '123123123',
-      description: 'Venter på onboarding fra Uni.',
-      fileTypes: 'C053, C54C',
+      description: 'Mottar filer, ingen avtale.',
+      fileTypes: 'C053',
       bic: 'SPRNO22',
-      lastReceived: '28/06/2021 08:00',
-      isZDataCustomer: true,
+      lastReceived: '19/04/2021 08:00',
+      isZDataCustomer: false,
     },
     {
       id: 7,
-      company: 'Bedrift Alpha AS',
+      company: 'Echo Eiendom AS',
       orgNumber: '123123123',
-      description: 'Venter på onboarding fra Uni.',
-      fileTypes: 'C053, C54C',
+      description: 'Ikke lenger kunde.',
+      fileTypes: 'C053, C54C, CAMT',
       bic: 'SPRNO22',
-      lastReceived: '30/04/2021 08:00',
+      lastReceived: '19/04/2021 07:50',
       isZDataCustomer: false,
     },
     {
       id: 8,
-      company: 'Bedrift Alpha AS',
+      company: 'Foxtrot Kjøkken AS',
       orgNumber: '123123123',
-      description: 'Venter på onboarding fra Uni.',
-      fileTypes: 'C053, C54C',
+      description: '',
+      fileTypes: 'C053, C54C, CAMT',
       bic: 'SPRNO22',
-      lastReceived: '30/04/2021 08:00',
+      lastReceived: '18/04/2021 10:00',
       isZDataCustomer: false,
     },
     {
       id: 9,
-      company: 'Bedrift Alpha AS',
+      company: 'Golfbane Oslo AS',
       orgNumber: '123123123',
       description: 'Venter på onboarding fra Uni.',
-      fileTypes: 'C053, C54C',
-      bic: 'SPRNO22',
-      lastReceived: '30/04/2021 08:00',
+      fileTypes: 'SWIO',
+      bic: 'SPSONO22',
+      lastReceived: '18/04/2021 09:30',
       isZDataCustomer: false,
     },
     {
@@ -168,45 +186,49 @@ const SupportCase = ({ location }) => {
       description: 'Venter på onboarding fra Uni.',
       fileTypes: 'C053, C54C',
       bic: 'SPRNO22',
-      lastReceived: '30/04/2021 08:00',
+      lastReceived: '18/04/2021 08:00',
       isZDataCustomer: false,
     },
     {
       id: 11,
-      company: 'Kiwi',
+      company: 'Hotel Isaksen AS',
       orgNumber: '123123123',
-      description: 'Venter på onboarding fra Uni.',
-      fileTypes: 'C053, C54C',
-      bic: 'SPRNO22',
-      lastReceived: '30/04/2021 08:00',
+      description: 'Ingen avtale, ingenting i Freshdesk.',
+      fileTypes: 'C053',
+      bic: 'SHEDNO22',
+      lastReceived: '17/04/2021 08:00',
       isZDataCustomer: false,
     },
     {
       id: 12,
-      company: 'REMA 1000',
+      company: 'Juliett Gelato AS',
       orgNumber: '123123123',
-      description: 'Venter på onboarding fra Uni.',
-      fileTypes: 'C053, C54C',
+      description: 'Ingen avtale.',
+      fileTypes: 'C053',
       bic: 'SPRNO22',
-      lastReceived: '30/04/2021 08:00',
+      lastReceived: '16/04/2021 08:00',
       isZDataCustomer: false,
     },
   ]
 
   return currentPage ? (
     <section>
-      <SupportCaseHeader
-        currentPage={'Sparebank 1 SMN'} //* change to currentPage, and to database search for name with guid
-        breadcrumbs={breadcrumbs}
-        isDetailedPage
-      />
+      <div className="border-bottom pt-5 pb-2 mt-2 mb-4">
+        <Breadcrumbs currentPage={currentPage} items={breadcrumbs} />
+        <h1 className="pt-4 fs-2 text-capitalize text-eee">{formatName(currentPage)}</h1>
+      </div>
       <div className="row">
-        <div className="col-lg-12 card d-block border-primary pt-3" id="table">
-          <Table
-            columns={columns}
-            data={data}
-            onRowClicked={(row) => handleRowClick(row)}
-          />
+        <div className="col-xl-12">
+          <div className="card bg-dark-gray-light mb-3">
+            <div className="pt-3 mb-3 pe-2" id="table">
+              <Table
+                columns={columns}
+                data={data}
+                onRowClicked={(row) => handleRowClick(row)}
+                displayZDataCustomersFilter
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -215,4 +237,4 @@ const SupportCase = ({ location }) => {
   )
 }
 
-export default SupportCase
+export default FilesInError

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import DataTable from 'react-data-table-component'
+import DataTable, { IDataTableColumn } from 'react-data-table-component'
 import Spinner from '../ui/Spinner'
-import SupportCaseModal from './SupportCaseModal'
+import SupportCaseModal from './supportcases/SupportCaseModal'
 
 const customStyles = {
   rows: {
@@ -32,6 +32,13 @@ const Table = ({
   displayZDataCustomersFilter,
   displayToolbar,
   displaySupportCasesToolbar,
+}: {
+  columns: IDataTableColumn<any>[]
+  data: any[]
+  onRowClicked: any
+  displayZDataCustomersFilter?: boolean
+  displayToolbar?: boolean
+  displaySupportCasesToolbar?: boolean
 }) => {
   const [loading, setLoading] = useState(true)
   const [filteredData, setFilteredData] = useState(data)
@@ -56,9 +63,9 @@ const Table = ({
 
   //* Retrieves total rows saved in LocalStorage and checks if it is a valid number
   useEffect(() => {
-    const totalRows = localStorage.getItem('total-rows')
-    if (!isNaN(parseInt(totalRows))) {
-      setTotalRows(parseInt(totalRows))
+    const rows = localStorage.getItem('total-rows')
+    if (rows && !isNaN(parseInt(rows))) {
+      setTotalRows(parseInt(rows))
     }
     setLoading(false)
   }, [])
@@ -96,7 +103,7 @@ const Table = ({
       conditionalRowStyles={conditionalRowStyles}
       progressPending={tableLoading}
       progressComponent={<Spinner />}
-      onRowClicked={(row) => onRowClicked(row)}
+      onRowClicked={(row: any) => onRowClicked(row)}
       paginationPerPage={totalRows}
       paginationRowsPerPageOptions={[25, 50, 150, 300, 500]}
       onChangeRowsPerPage={(totalRows) => handleChangeRowsPerPage(totalRows)}
@@ -134,7 +141,7 @@ const SubHeader = ({
 }) => {
   return (
     <div className="row w-100" id="table-subheader">
-      <div className="col-lg-9">
+      <div className="col-lg-9 pe-0">
         <div className="input-group bg-dark-gray-light mb-3">
           <span className="input-group-text border-0 bg-dark-gray" id="search-icon">
             <i className="ai-search fs-4"></i>
@@ -147,11 +154,50 @@ const SubHeader = ({
             aria-describedby="search-icon"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
+          <button
+            type="button"
+            className="btn btn-primary d-block d-lg-none dropdown-toggle"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i className="ai-filter-alt" />
+          </button>
+          <div className="dropdown-menu my-1">
+            <button
+              type="button"
+              className="btn btn-link dropdown-item text-decoration-none"
+              title="Refresh"
+              onClick={() => handleRefresh()}
+              disabled={disableRefreshButton}
+            >
+              <i className="ai-refresh-cw pe-2" /> Refresh
+            </button>
+            <button
+              type="button"
+              className="btn btn-link dropdown-item text-decoration-none"
+              title="Retry selected"
+            >
+              <i className="ai-download pe-2" /> Retry
+            </button>
+            {/* <SupportCaseModal /> */}
+            <button
+              type="button"
+              className="btn btn-link dropdown-item text-decoration-none"
+              title="Delete selected"
+            >
+              <i className="ai-trash-2 pe-2" /> Delete
+            </button>
+          </div>
         </div>
       </div>
       <div className="col-lg-3">
         {displayZDataCustomersFilter && (
-          <div className="btn-toolbar" role="toolbar" aria-label="Settings toolbar">
+          <div
+            className="btn-toolbar d-none d-lg-block"
+            role="toolbar"
+            aria-label="Settings toolbar"
+          >
             <div className="btn-group me-2 mb-2 w-100" role="group" aria-label="Settings group">
               <button
                 type="button"
@@ -173,7 +219,11 @@ const SubHeader = ({
           </div>
         )}
         {displayToolbar && (
-          <div className="btn-toolbar" role="toolbar" aria-label="Settings toolbar">
+          <div
+            className="btn-toolbar d-none d-lg-block"
+            role="toolbar"
+            aria-label="Settings toolbar"
+          >
             <div className="btn-group me-2 mb-2 w-100" role="group" aria-label="Settings group">
               <button
                 type="button"
@@ -194,7 +244,7 @@ const SubHeader = ({
           </div>
         )}
         {displaySupportCasesToolbar && (
-          <div className="row">
+          <div className="row d-none d-lg-block">
             <div className="col-lg">
               <div className="btn-toolbar" role="toolbar" aria-label="Settings toolbar">
                 <div className="btn-group me-2 mb-2" role="group" aria-label="Settings group">
@@ -216,7 +266,7 @@ const SubHeader = ({
                   className="form-check-input"
                   type="checkbox"
                   id="zdata-customers"
-                  onClick={(e) => setFilterZDataCustomers(e.target.checked)}
+                  onClick={(e) => setFilterZDataCustomers((e.target as HTMLInputElement).checked)}
                   role="button"
                 />
                 <label className="form-check-label" htmlFor="zdata-customers" role="button">

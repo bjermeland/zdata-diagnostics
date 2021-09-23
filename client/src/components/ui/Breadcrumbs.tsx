@@ -1,20 +1,30 @@
 import { Link } from 'react-router-dom'
 import { isGuid } from '../../utils/pagetitles'
 
-const formatOrganizationNumber = (orgNumber) => {
+interface BreadcrumbLink {
+  name: string
+  href: string
+}
+
+const formatOrganizationNumber = (orgNumber: string): string => {
   return orgNumber.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1 ')
 }
 
-const formatName = (name) => {
-  return name.split(' ').map((word) => (word.length === 3 ? `${word.toUpperCase()} ` : `${word} `))
+//* DNB, SDC, SEB for example
+const formatName = (name: string): string => {
+  return name
+    .split(' ')
+    .map((word) => (word.length === 3 ? `${word.toUpperCase()} ` : `${word} `))
+    .join(' ')
 }
 
-const Breadcrumbs = ({ currentPage, items }) => {
+const Breadcrumbs = ({ currentPage, items }: { currentPage: string; items: BreadcrumbLink[] }) => {
   return (
     <nav className="pt-5 d-none d-xl-block" aria-label="breadcrumb">
       <ol className="breadcrumb">
         {items.map((item, index) => {
-          const name = isNaN(item.name)
+          //* Checks if name consists of only digits
+          const name = !item.name.match(/^\d+$/)
             ? isGuid(item.name)
               ? 'File'
               : formatName(item.name)
@@ -22,7 +32,7 @@ const Breadcrumbs = ({ currentPage, items }) => {
           if (item.name === currentPage) {
             return (
               <li key={index} className="breadcrumb-item active" aria-current="page">
-                {isNaN(name) ? name : name}
+                {!name.match(/^\d+$/) ? name : name}
               </li>
             )
           } else {

@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { useCopyToClipboard } from '../../hooks/hooks'
 import { toast } from '../../ui/Toast'
 
-const Actions = ({ content, textAreaRef }) => {
+const Actions = ({ content }) => {
   const [publicShareId, setPublicShareId] = useState('')
   const [isPublicShareIdCopied, copyPublicShareId] = useCopyToClipboard(publicShareId)
 

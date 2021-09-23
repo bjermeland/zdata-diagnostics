@@ -1,6 +1,22 @@
 import Breadcrumbs from '../../ui/Breadcrumbs'
 
-const Header = ({ currentPage, breadcrumbs }) => {
+interface BreadcrumbLink {
+  name: string
+  href: string
+}
+
+interface Bank {
+  name: string
+  bic: string
+}
+
+const Header = ({
+  currentPage,
+  breadcrumbs,
+}: {
+  currentPage: string
+  breadcrumbs: BreadcrumbLink[]
+}) => {
   return (
     <div className="border-bottom pt-5 pb-1 mt-2 mb-4 row">
       <Breadcrumbs currentPage={currentPage} items={breadcrumbs} />

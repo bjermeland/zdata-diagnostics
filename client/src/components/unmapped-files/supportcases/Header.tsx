@@ -1,6 +1,24 @@
 import Breadcrumbs from '../../ui/Breadcrumbs'
 
-const SupportCaseHeader = ({ currentPage, breadcrumbs, isDetailedPage }) => {
+interface BreadcrumbLink {
+  name: string
+  href: string
+}
+
+interface Bank {
+  name: string
+  bic: string
+}
+
+const SupportCaseHeader = ({
+  currentPage,
+  breadcrumbs,
+  isDetailedPage,
+}: {
+  currentPage: string
+  breadcrumbs: BreadcrumbLink[]
+  isDetailedPage?: boolean
+}) => {
   return (
     <div className="border-bottom pt-5 pb-1 mt-2 mb-4 row">
       <Breadcrumbs currentPage={currentPage} items={breadcrumbs} />

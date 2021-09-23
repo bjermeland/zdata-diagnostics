@@ -1,31 +1,39 @@
 import dayjs from 'dayjs'
-import { useState } from 'react'
+import { SyntheticEvent, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { RootState } from '../../../store'
 
-const Comments = ({ values }) => {
-  const auth = useSelector((state) => state.auth)
+interface Comment {
+  id: string
+  author: string
+  date: Date
+  text: string
+}
+
+const Comments = ({ values }: { values: Comment[] }) => {
+  const auth = useSelector((state: RootState) => state.auth)
   const [comments, setComments] = useState(values)
   const [inputValue, setInputValue] = useState('')
-  const [inputError, setInputError] = useState(null)
+  const [inputError, setInputError] = useState(false)
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = (event: SyntheticEvent) => {
+    event.preventDefault()
 
-    if (inputValue.length < 3) {
+    const author = auth?.user?.profile.full_name
+
+    if (inputValue.length < 3 || !author) {
       setInputError(true)
       return
     }
 
-    const newComment = {
-      id: (Math.random() * (10000 - 0 + 1)) << 0,
-      author: auth.user.profile.full_name,
+    const comment: Comment = {
+      id: (Math.random() * (10000 - 0 + 1)).toString(),
+      author,
       date: new Date(),
       text: inputValue,
     }
 
-    console.log(newComment.id)
-
-    setComments([...comments, newComment])
+    setComments([...comments, comment])
 
     setInputValue('')
     setInputError(false)
@@ -62,7 +70,7 @@ const Comments = ({ values }) => {
 
           <div style={{ maxHeight: '35vh', overflowY: 'scroll' }}>
             {comments
-              .sort((a, b) => b.date - a.date)
+              .sort((a, b) => +b.date - +a.date)
               .map((comment) => {
                 return (
                   <div key={comment.id} className="card bg-dark-gray mb-3">

@@ -1,8 +1,9 @@
 import { CallbackComponent } from 'redux-oidc'
+import { User } from 'oidc-client'
 import userManager from './userManager'
 import Spinner from '../components/ui/Spinner'
 
-const successCallback = (user, history) => {
+const successCallback = (user: User, history) => {
   history.push(user.state.path)
 }
 

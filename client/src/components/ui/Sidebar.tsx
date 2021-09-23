@@ -3,7 +3,17 @@ import { Link, NavLink } from 'react-router-dom'
 import Switch from 'react-switch'
 import userManager from '../../tools/userManager'
 
-const items = [
+interface SidebarItem {
+  name: string
+  childrens: SidebarItemChildren[]
+}
+
+interface SidebarItemChildren {
+  name: string
+  fileCount?: number
+}
+
+const items: SidebarItem[] = [
   {
     name: 'Diagnostics',
     childrens: [
@@ -53,7 +63,7 @@ const Sidebar = () => {
             <span className="badge rounded-pill bg-danger float-end px-2">8</span>
           </NavLink>
         </nav>
-        {items.map((item) => {
+        {items.map((item: SidebarItem) => {
           //* Remove all spaces from name (used in identifiers)
           const identifier = item.name.replace(/\s+/g, '')
           return (
@@ -81,7 +91,7 @@ const Sidebar = () => {
                   data-bs-parent={`#accordion-${identifier}`}
                 >
                   <div className="widget-nav nav nav-light flex-column">
-                    {item.childrens.map((children, childrenIdx) => {
+                    {item.childrens.map((children: SidebarItemChildren, childrenIdx: number) => {
                       return (
                         <NavLink
                           key={childrenIdx}

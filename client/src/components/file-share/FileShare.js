@@ -376,18 +376,12 @@ const FileShare = () => {
   }
 
   return true ? (
-    <main
-      className="container-fluid h-100 bg-dark text-white"
-      id="file-share-container"
-    >
+    <main className="container-fluid h-100 bg-dark text-white" id="file-share-container">
       <div className="col-xxl-12">
         <section>
           <Header />
           <div className="row" id="code-container">
-            <div
-              className="col-lg-12 card d-block border-0 code-container-dark pb-2"
-              id="table"
-            >
+            <div className="col-lg-12 card d-block border-0 code-container-dark pb-2" id="table">
               <Toolbar
                 handleSearchInput={handleSearchInput}
                 handleShareButton={handleShareButton}
@@ -395,10 +389,7 @@ const FileShare = () => {
                 handleDownloadButton={handleDownloadButton}
               />
 
-              <FileContent
-                content={fileContent}
-                highlightedLineNumbers={highlightedLineNumbers}
-              />
+              <FileContent content={fileContent} highlightedLineNumbers={highlightedLineNumbers} />
 
               <textarea
                 className="hidden-textarea bg-dark"

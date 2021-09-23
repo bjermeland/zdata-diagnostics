@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import AuthCallback from '../tools/AuthCallback'
 import CheckAuth from '../tools/CheckAuth'
@@ -9,10 +9,10 @@ import Dashboard from './dashboard/Dashboard'
 import UnmappedFiles from './unmapped-files/UnmappedFiles'
 import Company from './unmapped-files/company/Company'
 import File from './unmapped-files/file/File'
-import FileShare from './file-share/FileShare'
 import SupportCases from './unmapped-files/supportcases/SupportCases'
 import SupportCase from './unmapped-files/supportcases/SupportCase'
 import FilesInError from './unmapped-files/filesinerror/FilesInError'
+import { RootState } from '../store'
 
 const App = () => {
   return (
@@ -29,7 +29,7 @@ const App = () => {
 const UnmappedFilesRoutes = ['dnb', 'dnb-signed', 'evry', 'nordea', 'sdc', 'eika', 'seb']
 
 const Routes = () => {
-  const auth = useSelector((state) => state.auth)
+  const auth = useSelector((state: RootState) => state.auth)
   return auth && auth.user && auth.user.profile ? (
     <main className="container-fluid">
       <section className="offcanvas-enabled-start row pb-3 pb-md-4">
@@ -40,17 +40,18 @@ const Routes = () => {
 
           <Route exact path={`/files-in-error`} component={FilesInError} />
           <Route exact path={`/files-in-error/:orgnumber`} component={Company} />
-          <Route excat path={`/files-in-error/:orgnumber/:id`} component={File} />
+          <Route exact path={`/files-in-error/:orgnumber/:id`} component={File} />
 
           {UnmappedFilesRoutes.map((route) => {
             return (
               <div key={route}>
                 <Route exact path={`/unmapped-files/${route}`} component={UnmappedFiles} />
                 <Route exact path={`/unmapped-files/${route}/:orgnumber`} component={Company} />
-                <Route excat path={`/unmapped-files/${route}/:orgnumber/:id`} component={File} />
+                <Route exact path={`/unmapped-files/${route}/:orgnumber/:id`} component={File} />
               </div>
             )
           })}
+
           <Route exact path="/unmapped-files/support-cases" component={SupportCases} />
           <Route exact path="/unmapped-files/support-cases/:id" component={SupportCase} />
         </div>
