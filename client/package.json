@@ -60,6 +60,6 @@
     "@types/react-dom": "^17.0.9",
     "@types/react-gravatar": "^2.6.10",
     "@types/react-router-dom": "^5.3.0",
-    "@types/react-syntax-highlighter": "^13.5.2",
+    "@types/react-syntax-highlighter": "^13.5.2"
   }
 }
