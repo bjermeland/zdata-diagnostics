@@ -30,7 +30,7 @@ const Header = () => {
         />
         <span className="navbar-tool-label dropdown-toggle">
           <small>Hello,</small>
-          {auth?.user?.profile.full_name.split(' ')[0] ?? 'User'}
+          {auth?.user?.profile.full_name?.split(' ')[0] ?? 'User'}
         </span>
         <ul className="dropdown-menu dropdown-menu-end" style={{ width: '1rem', top: '30px' }}>
           <li>
